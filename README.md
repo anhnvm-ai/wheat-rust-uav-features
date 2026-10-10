@@ -1,4 +1,4 @@
-# Code — Compact Red-Edge Features and Risk-Controlled Triage for Explainable UAV Wheat-Rust Scouting
+# Code — Compact Red-Edge Features and Selective Prediction for Explainable UAV Wheat-Rust Scouting
 
 These scripts produce the computed results of the manuscript (`main.tex`, Elsevier cas-dc), except the
 items listed under Known gaps.
