@@ -32,7 +32,7 @@ def load_sample(sid, base):
     except: hs=None
     return rgb,ms,hs
 
-# ---- V7 extractors (verbatim) ----
+# ---- V7 extractors (the original competition script's extractors, reformatted) ----
 def extract_rgb_raw_features(rgb):
     if rgb is None: return np.zeros(30)
     f=[]; rgb=rgb.astype(np.float32)

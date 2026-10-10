@@ -1,4 +1,4 @@
-"""Shared V7 feature library: 150-feature extractors (verbatim from wheat_disease_v7_raw_nopca.py)
+"""Shared V7 feature library: 149-feature extractors (from wheat_disease_v7_raw_nopca.py, reformatted)
 + feature names + dataset builder. Used by V7_assets.py and submission scripts."""
 import numpy as np
 from pathlib import Path
