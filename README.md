@@ -119,7 +119,7 @@ averages over columns and bands. The "mean spectrum" of the HS block is therefor
 profile over pixel rows (rows 11–18 after trimming), and 47 of the 70 HS entries are constant. The code is kept
 unchanged, with a comment at the loader, so that the features match the evaluated pipeline (manuscript,
 Section 3.4.3). `diagnostics_r1/diag_leakage_hs.py` recomputes the HS block with each cube read in its stored
-orientation (Appendix A).
+orientation (Table 8, panel (c)).
 
 ## Known gaps
 
