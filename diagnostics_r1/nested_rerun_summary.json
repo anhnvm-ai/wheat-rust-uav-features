@@ -428,5 +428,37 @@
  "entropy_nested": {
   "mean_entropy_correct": 0.6602446159894807,
   "mean_entropy_wrong": 0.7794488424743291
+ },
+ "operating_point_nested": {
+  "alpha_min": 1.05,
+  "alpha_max": 1.4500000000000004,
+  "alpha_mean": 1.2580000000000005,
+  "alpha_counts": {
+   "1.05": 1,
+   "1.10": 4,
+   "1.15": 5,
+   "1.20": 10,
+   "1.25": 6,
+   "1.30": 13,
+   "1.35": 5,
+   "1.40": 3,
+   "1.45": 3
+  },
+  "macroF1_no_prior": {
+   "mean": 0.6672084104320107,
+   "sd_ddof0": 0.037808215859836056
+  },
+  "macroF1_nested_alpha": {
+   "mean": 0.6676724837866107,
+   "sd_ddof0": 0.03811558884241846
+  },
+  "health_recall_no_prior": {
+   "mean": 0.4035,
+   "sd_ddof0": 0.07794389007484807
+  },
+  "health_recall_nested_alpha": {
+   "mean": 0.4789999999999999,
+   "sd_ddof0": 0.08144937077718895
+  }
  }
 }

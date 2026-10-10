@@ -6,6 +6,8 @@
   2. Selective prediction with nested cut-offs: fold means and confusion matrices pooled over the 50 folds.
   3. Class-wise results of the ensemble with nested weights on the aggregated out-of-fold probabilities
      (mean over the ten repetitions), to compare with the validation-fold-weight values of the class-wise table.
+  4. Operating point with the nested Health-prior weight alpha (Table 12 of the revised manuscript): selected
+     alpha values and fold means and SDs (divisor n) of Macro-F1 and Health recall without and with alpha.
 Usage: python3 summarise_nested_rerun.py <dir with diag_*.json and diag_nested_perfold_probs.npz>"""
 import sys, json
 import numpy as np
@@ -72,7 +74,15 @@ for va, p_, d in zip(z['va'], z['p'], sorted(pf, key=lambda d: (d['r'], d['k']))
     e = -(P * np.log(np.clip(P, 1e-12, 1))).sum(1); ok = P.argmax(1) == yt
     ent_c += e[ok].tolist(); ent_w += e[~ok].tolist()
 entropy = {'mean_entropy_correct': float(np.mean(ent_c)), 'mean_entropy_wrong': float(np.mean(ent_w))}
-out = {'paired_rep0': paired, 'selective_prediction_nested': tri, 'classwise_nested_aggregated_oof': classwise, 'entropy_nested': entropy}
+# 4. operating point with nested alpha (per-fold values stored by diag_nested_perfold.py)
+alph = np.array([d['alpha'] for d in pf])
+def ms(key): v = np.array([d[key] for d in pf]); return {'mean': float(v.mean()), 'sd_ddof0': float(v.std())}
+operating = {'alpha_min': float(alph.min()), 'alpha_max': float(alph.max()), 'alpha_mean': float(alph.mean()),
+             'alpha_counts': {f'{a:.2f}': int(c) for a, c in zip(*np.unique(np.round(alph, 2), return_counts=True))},
+             'macroF1_no_prior': ms('f1_nested'), 'macroF1_nested_alpha': ms('f1_alpha'),
+             'health_recall_no_prior': ms('hrec_base'), 'health_recall_nested_alpha': ms('hrec_alpha')}
+out = {'paired_rep0': paired, 'selective_prediction_nested': tri, 'classwise_nested_aggregated_oof': classwise, 'entropy_nested': entropy,
+       'operating_point_nested': operating}
 json.dump(out, open(D / "nested_rerun_summary.json", "w"), indent=1)
 for name in ['B', 'C']:
     q = paired[name]
@@ -83,3 +93,6 @@ for c in tri:
     print(f"cov {c}: realised {q['cov']*100:.1f} acc {q['acc']*100:.1f} F1 {q['f1']*100:.1f} rust miss {q['rust_miss']*100:.1f} "
           f"| pooled n={q['n_pooled']} Hrec {q['health_recall_pooled']*100:.1f} Hprec {q['health_precision_pooled']*100:.1f}")
 print('class-wise (nested, aggregated OOF):', classwise['cm'], 'same as Table 7 row:', classwise['same_cm_as_validation_fold_weights'])
+q = operating
+print(f"alpha nested: {q['alpha_min']:.2f}-{q['alpha_max']:.2f} (mean {q['alpha_mean']:.2f}); Macro-F1 {q['macroF1_no_prior']['mean']*100:.1f} -> "
+      f"{q['macroF1_nested_alpha']['mean']*100:.1f}; Health recall {q['health_recall_no_prior']['mean']*100:.1f} -> {q['health_recall_nested_alpha']['mean']*100:.1f}")
