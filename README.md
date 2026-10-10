@@ -56,7 +56,7 @@ All evaluations use the same fixed protocol (defined in `r2_lib.py`):
 | Figure 2 (`fig:compact`) and the corrected CIs of Table 10 | `figures_r1/fig_compact_r1.py` (reads `V7_compact.json`) | `V7_compact_curve_r1.png` |
 | Table 11 (`tab:fullcompact`), compact-30 late submission | `R2_compact_submission.py` | `submission_compact30.csv`, `V7_compact_submission.json` |
 | Table 9 (`tab:canopy`) | `R2_canopy_extract.py`, then `R2_canopy_eval.py` | `features_v7_canopy*.csv`, `V7_canopy.json` |
-| Table A3 (`tab:triage_insample`), panel (a): selective prediction of the original analysis (in-sample) | `R2_triage.py` | `V7_triage.json` |
+| Table A3 (`tab:triage_insample`), panel (a), and the in-sample selective-prediction cell of Table A2 (`tab:checks`), panel (a): selective prediction of the original analysis | `R2_triage.py` | `V7_triage.json` |
 | Table A3, panel (b): confusion matrices of the original analysis | full coverage: `Av_consolidated_eval.py` (`confusion_matrix`); 80% coverage: derived from the per-class counts and metrics in `V7_triage.json`; it is the only integer matrix consistent with them and with the full-coverage matrix (no cell can exceed its full-coverage count; no separate script) | `V7_consolidated_eval.json`, `V7_triage.json` |
 | In-sample risk-coverage figure of the original analysis (not in the revised manuscript) | `figures_r1/fig_risk_coverage_r1.py` (reads `V7_triage.json`) | `V7_risk_coverage_r1.png` |
 | Table 15 (`tab:proxyspatial`) | `R2_proxy_spatial.py` | `V7_proxy_spatial.json` |
