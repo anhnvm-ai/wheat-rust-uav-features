@@ -47,7 +47,7 @@ All evaluations use the same fixed protocol (defined in `r2_lib.py`):
 | Table 6 (`tab:main_results`) and Table A1, weighted ensemble with validation-fold weights (as submitted) | `Av_consolidated_eval.py` | `V7_consolidated_eval.json` |
 | Table 6, single-model rows (SVM, ET, RF, LGB, XGB) | *no script, see Known gaps* | `V7_permodel.json` |
 | Table A1, fair multimodal DL as submitted (epoch chosen on the scored fold) | `B1_dl_baseline.py` (GPU) | `B1_dl_baseline.json` |
-| Tables 6 and 7, ResNet-18 and naive late fusion; Supplementary Table S1 | `legacy_dl/04_baseline_deep_learning.py` (GPU) | `outputs/results/dl_baseline_detailed.json` |
+| Tables 6 and 7, ResNet-18 and naive late fusion; Table C1 (`tab:naivedl`) | `legacy_dl/04_baseline_deep_learning.py` (GPU) | `outputs/results/dl_baseline_detailed.json` |
 | Table 7 (`tab:perclass`), ensemble row; Table 12 (`tab:operating`); Figure 5 (`fig:reliability`); ECE/Brier | `Av_consolidated_eval.py` | `V7_consolidated_eval.json`, `V7_reliability_diagram.png` |
 | Section 4.9 and Table 11 (`tab:fullcompact`), full-model late submission (0.790 private, 0.653 public) | `V7_honest_eval.py` | `submission_v7_repro.csv` |
 | Table 8 (`tab:ablation`), modality panel; SHAP values | `V7_assets.py` | `V7_assets.json` |
