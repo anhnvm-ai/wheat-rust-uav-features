@@ -1,6 +1,4 @@
-# Code — Engineered features versus deep learning for wheat rust classification from a small UAV dataset
-
-(First submitted as "Compact Red-Edge Features and Risk-Controlled Triage for Explainable UAV Wheat-Rust Scouting".)
+# Code — Compact Red-Edge Features and Risk-Controlled Triage for Explainable UAV Wheat-Rust Scouting
 
 These scripts produce the computed results of the manuscript (`main.tex`, Elsevier cas-dc), except the
 items listed under Known gaps.
@@ -59,7 +57,7 @@ All evaluations use the same fixed protocol (defined in `r2_lib.py`):
 | Table 11 (`tab:fullcompact`), compact-30 late submission | `R2_compact_submission.py` | `submission_compact30.csv`, `V7_compact_submission.json` |
 | Table 9 (`tab:canopy`) | `R2_canopy_extract.py`, then `R2_canopy_eval.py` | `features_v7_canopy*.csv`, `V7_canopy.json` |
 | Table 13 (`tab:triage`) | `R2_triage.py` | `V7_triage.json` |
-| Table 14 (`tab:triagecm`) | full coverage: `Av_consolidated_eval.py` (`confusion_matrix`); 80% coverage: the only integer matrix consistent with the per-class counts and metrics in `V7_triage.json` (no separate script) | `V7_consolidated_eval.json`, `V7_triage.json` |
+| Table 14 (`tab:triagecm`) | full coverage: `Av_consolidated_eval.py` (`confusion_matrix`); 80% coverage: derived from the per-class counts and metrics in `V7_triage.json`; it is the only integer matrix consistent with them and with the full-coverage matrix, in which no cell can exceed its full-coverage count (no separate script) | `V7_consolidated_eval.json`, `V7_triage.json` |
 | Figure 6 (`fig:triage`) | `figures_r1/fig_risk_coverage_r1.py` (reads `V7_triage.json`) | `V7_risk_coverage_r1.png` |
 | Table 15 (`tab:proxyspatial`) | `R2_proxy_spatial.py` | `V7_proxy_spatial.json` |
 | `tab:srsm` (submitted version only; removed in the revision) | `R2_srsm.py` | `features_v7_srsm.csv`, `V7_srsm.json` |
@@ -83,7 +81,9 @@ Not produced by code:
   and Leaderboard pages. All scored files are late submissions, made after the competition had closed.
 
 `original_v7/wheat_disease_v7_raw_nopca.py` is the original competition script (January 2026,
-Windows paths). `feat_v7_lib.py` copies its feature extractors verbatim.
+Windows paths). `feat_v7_lib.py` contains the same feature extractors in reformatted form: on the 600 training
+tiles its output equals that of the original script's extractors, and it reproduces `features_v7.csv`
+(`timing_r1/`: max_abs_diff = 0).
 
 ## Run order
 
@@ -135,6 +135,9 @@ manuscript stated.
 - **Figures 1–2 of the submitted version** were drawn by hand (see "Not produced by code"): Figure 1 has been
   redrawn and Figure 2 removed.
 - **Kaggle scores** were typed by hand (see "Not produced by code").
+- **File checks in Table 1 and Section 3.1** (MS digital numbers 0–11,406; 111 training and 48 test HS files with
+  126 bands; RGB minimum 0 in every channel; 30 MS tiles with zero-valued pixels) were computed interactively;
+  there is no script.
 - **`V7_honest_eval.json` per-class F1** has Rust and Other swapped, because of the `LabelEncoder` ordering. Use
   `V7_consolidated_eval.json` instead.
 - **Pre-deadline file and reproduction.** The pre-deadline prediction file `submission_v7.csv` (127 Rust) and the
