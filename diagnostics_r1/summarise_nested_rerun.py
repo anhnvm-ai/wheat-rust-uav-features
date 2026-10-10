@@ -5,7 +5,8 @@
      Nadeau-Bengio corrected variance (1/J + n_test/n_train) s_d^2, J = 5, n_test/n_train = 1/4, t on J-1 df.
   2. Selective prediction with nested cut-offs: fold means and confusion matrices pooled over the 50 folds.
   3. Class-wise results of the ensemble with nested weights on the aggregated out-of-fold probabilities
-     (mean over the ten repetitions), to compare with the validation-fold-weight values of the class-wise table.
+     (mean over the ten repetitions): the ensemble row of Table 7 of the revised manuscript (the values with
+     validation-fold weights of the original analysis are in Table A3).
   4. Operating point with the nested Health-prior weight alpha (Table 12 of the revised manuscript): selected
      alpha values and fold means and SDs (divisor n) of Macro-F1 and Health recall without and with alpha.
 Usage: python3 summarise_nested_rerun.py <dir with diag_*.json and diag_nested_perfold_probs.npz>"""
