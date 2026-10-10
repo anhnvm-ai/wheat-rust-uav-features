@@ -42,23 +42,23 @@ All evaluations use the same fixed protocol (defined in `r2_lib.py`):
 |---|---|---|
 | 149-feature extraction (Section 3.4; Table 3, `tab:featcount`) | `feat_v7_lib.py` (library), `V7_assets.py` | `features_v7.csv` |
 | Table 2 (`tab:ndvi`), tile NDVI by class | computed from the `ms_NDVI` column (no separate script) | `features_v7.csv` |
-| Table 6 (`tab:main_results`) and Table A1, weighted ensemble with validation-fold weights (as submitted) | `Av_consolidated_eval.py` | `V7_consolidated_eval.json` |
-| Table 6, single-model rows (SVM, ET, RF, LGB, XGB) | *no script, see Known gaps* | `V7_permodel.json` |
+| Table A1 (`tab:original`), weighted ensemble with validation-fold weights (as submitted) | `Av_consolidated_eval.py` | `V7_consolidated_eval.json` |
+| Table C2 (`tab:otherprot`), single-model rows (SVM, ET, RF, LGB, XGB) | *no script, see Known gaps* | `V7_permodel.json` |
 | Table A1, fair multimodal DL as submitted (epoch chosen on the scored fold) | `B1_dl_baseline.py` (GPU) | `B1_dl_baseline.json` |
-| Tables 6 and 7, ResNet-18 and naive late fusion; Table C1 (`tab:naivedl`) | `legacy_dl/04_baseline_deep_learning.py` (GPU) | `outputs/results/dl_baseline_detailed.json` |
+| Table C2 (`tab:otherprot`), ResNet-18 and naive late fusion (results and class-wise values); Table C1 (`tab:naivedl`) | `legacy_dl/04_baseline_deep_learning.py` (GPU) | `outputs/results/dl_baseline_detailed.json` |
 | Table 7 (`tab:perclass`), ensemble row; Table 12 (`tab:operating`); Figure 5 (`fig:reliability`); ECE/Brier | `Av_consolidated_eval.py` | `V7_consolidated_eval.json`, `V7_reliability_diagram.png` |
 | Section 4.9 and Table 11 (`tab:fullcompact`), full-model late submission (0.790 private, 0.653 public) | `V7_honest_eval.py` | `submission_v7_repro.csv` |
-| Table 8 (`tab:ablation`), modality panel; SHAP values | `V7_assets.py` | `V7_assets.json` |
+| Table 8 (`tab:ablation`), modality panel; original SHAP values (Appendix A, "Original SHAP run") | `V7_assets.py` | `V7_assets.json` |
 | Table 8 (`tab:ablation`), feature-group panel | `Av_feature_ablation_v7.py` | `V7_feature_ablation.json` |
-| Figure 3 (`fig:shap`) | `figures_r1/fig_shap_r1.py` (reads `V7_assets.json`; the submitted figure was drawn by `Av_shap_figure_v7.py`) | `V7_shap_permodality_r1.png` |
+| Original SHAP figure (not in the revised manuscript; Figure 3 now uses the October 2026 re-run, see below) | `figures_r1/fig_shap_r1.py` (reads `V7_assets.json`; the submitted figure was drawn by `Av_shap_figure_v7.py`) | `V7_shap_permodality_r1.png` |
 | Figure 4 (`fig:lime`) | `Av_lime_v7.py` | `V7_lime.json`, `V7_lime_fidelity.png` |
 | Table 10 (`tab:compact`), Table B1 (`tab:compact30`), compact-model cost in Table 16 | `R2_compact.py` | `V7_compact.json` |
 | Figure 2 (`fig:compact`) and the corrected CIs of Table 10 | `figures_r1/fig_compact_r1.py` (reads `V7_compact.json`) | `V7_compact_curve_r1.png` |
 | Table 11 (`tab:fullcompact`), compact-30 late submission | `R2_compact_submission.py` | `submission_compact30.csv`, `V7_compact_submission.json` |
 | Table 9 (`tab:canopy`) | `R2_canopy_extract.py`, then `R2_canopy_eval.py` | `features_v7_canopy*.csv`, `V7_canopy.json` |
-| Table 13 (`tab:triage`) | `R2_triage.py` | `V7_triage.json` |
-| Table 14 (`tab:triagecm`) | full coverage: `Av_consolidated_eval.py` (`confusion_matrix`); 80% coverage: derived from the per-class counts and metrics in `V7_triage.json`; it is the only integer matrix consistent with them and with the full-coverage matrix (no cell can exceed its full-coverage count; no separate script) | `V7_consolidated_eval.json`, `V7_triage.json` |
-| Figure 6 (`fig:triage`) | `figures_r1/fig_risk_coverage_r1.py` (reads `V7_triage.json`) | `V7_risk_coverage_r1.png` |
+| Table A3 (`tab:triage_insample`), panel (a): selective prediction of the original analysis (in-sample) | `R2_triage.py` | `V7_triage.json` |
+| Table A3, panel (b): confusion matrices of the original analysis | full coverage: `Av_consolidated_eval.py` (`confusion_matrix`); 80% coverage: derived from the per-class counts and metrics in `V7_triage.json`; it is the only integer matrix consistent with them and with the full-coverage matrix (no cell can exceed its full-coverage count; no separate script) | `V7_consolidated_eval.json`, `V7_triage.json` |
+| In-sample risk-coverage figure of the original analysis (not in the revised manuscript) | `figures_r1/fig_risk_coverage_r1.py` (reads `V7_triage.json`) | `V7_risk_coverage_r1.png` |
 | Table 15 (`tab:proxyspatial`) | `R2_proxy_spatial.py` | `V7_proxy_spatial.json` |
 | `tab:srsm` (submitted version only; removed in the revision) | `R2_srsm.py` | `features_v7_srsm.csv`, `V7_srsm.json` |
 
@@ -67,13 +67,17 @@ All evaluations use the same fixed protocol (defined in `r2_lib.py`):
 | Manuscript item | Script | Output |
 |---|---|---|
 | Fixed folds of the 10×5 protocol (6,000 rows: `sample_id`, `label`, `repetition`, `fold`) | `make_folds_10x5.py` | `folds_10x5.csv` (this folder) |
-| Table 6 (`tab:main_results`), weighted ensemble with nested weights; Table A2 (`tab:checks`), panels (a) nested α and selective-prediction cut-off and (c) HS block recomputed in the stored cube orientation | `diagnostics_r1/diag_leakage_hs.py` | `diagnostics_r1/diag_leakage_hs.json` |
+| Table 6 (`tab:main_results`), weighted ensemble with nested weights; Table 8 (`tab:ablation`), panel (c), HS block recomputed in the stored cube orientation; Table A2 (`tab:checks`), panel (a), nested α and selective-prediction cut-off | `diagnostics_r1/diag_leakage_hs.py` | `diagnostics_r1/diag_leakage_hs.json` |
+| Table 6, panel (b) (paired comparison with the fair deep network on the folds of repetition 0); Tables 13 (`tab:triage`) and 14 (`tab:triagecm`), selective prediction with nested cut-offs | `diagnostics_r1/diag_nested_perfold.py` (re-runs the nested part of `diag_leakage_hs.py` for the evaluated pipeline and also stores the score, probabilities and selective-prediction results of every outer fold; it stops unless its means equal those stored in `diag_leakage_hs.json`), then `diagnostics_r1/summarise_nested_rerun.py` (also reads `diag_dl_earlystop.json` and `diag_dl_protoC.json`; fits no model) | `diagnostics_r1/diag_nested_perfold.json`, `diagnostics_r1/diag_nested_perfold_probs.npz`, `diagnostics_r1/nested_rerun_summary.json` |
+| Figure 6 (`fig:triage`) | `figures_r1/fig_risk_coverage_r2.py` (reads `nested_rerun_summary.json`) | `V7_risk_coverage_r2.png` |
+| Figure 3 (`fig:shap`) and the SHAP values of Section 4.5.1 (re-run of the SHAP step of `V7_assets.py`; agreement over all and over the non-constant features; package versions stored in the output) | `diagnostics_r1/diag_shap_nonconstant.py`, then `figures_r1/fig_shap_r2.py` | `diagnostics_r1/diag_shap_nonconstant.json`, `V7_shap_permodality_r2.png` |
 | Tables 6, 7 and 16, fair multimodal DL, protocol B (early stopping on an inner 15% split); Table A1 (same rule as submitted, re-run); Table A2, panel (b) | `diagnostics_r1/diag_dl_earlystop.py` (GPU) | `diagnostics_r1/diag_dl_earlystop.json` |
 | Table 6, fair multimodal DL, protocol C (retrained on the full training fold); Table A2, panel (b) | `diagnostics_r1/diag_dl_protoC.py` (GPU) | `diagnostics_r1/diag_dl_protoC.json` |
 | Tables 6, 7 and 16, MLP (256-128-3) on the 149 features | `B2_mlp_v7.py` | `outputs/reviewer_experiments/B2_mlp_v7.json` |
 | Table 16 (`tab:compute`), feature-extraction time | `timing_r1/time_feature_extraction.py` | `timing_r1/timing_feature_extraction.json` |
 
 Not produced by code:
+- Table 17 (`tab:stages`) compiles values from Tables 6, 8, 9, 10, 13, A2 and C2; no model was fitted for it.
 - Figure 1 (`fig:block_diagram`) is drawn with TikZ in the manuscript source (`fig_pipeline.tex`). In the submitted version,
   it and `fig:flowchart` (now removed) were drawn by hand in draw.io and showed an earlier 226-feature version
   of the pipeline.
@@ -102,6 +106,10 @@ run in minutes.
 9. October 2026 re-evaluations and checks: `make_folds_10x5.py`, `B2_mlp_v7.py`,
    `diagnostics_r1/diag_leakage_hs.py` **[raw]**, `timing_r1/time_feature_extraction.py` **[raw]**, and on a GPU
    `diagnostics_r1/diag_dl_earlystop.py` **[raw]** and `diagnostics_r1/diag_dl_protoC.py` **[raw]**.
+10. October 2026 re-runs on CPU: `diagnostics_r1/diag_nested_perfold.py` (about 26 min with 2 jobs; set `NJOBS`;
+    finished folds are kept in a checkpoint file, so an interrupted run resumes), then
+    `diagnostics_r1/summarise_nested_rerun.py` and `figures_r1/fig_risk_coverage_r2.py`;
+    `diagnostics_r1/diag_shap_nonconstant.py`, then `figures_r1/fig_shap_r2.py`.
 
 ## HS block: loader axis order
 
@@ -118,7 +126,7 @@ orientation (Appendix A).
 The following items are not reproduced by the scripts in this folder, or differ from what the submitted
 manuscript stated.
 
-- **Single-model rows of Table 6 (`tab:main_results`)** (`V7_permodel.json`) come from an exploratory interactive run whose
+- **Single-model rows of Table C2 (`tab:otherprot`)** (`V7_permodel.json`) come from an exploratory interactive run whose
   script was not preserved. The saved accuracies are multiples of 1/1800, consistent with three repetitions
   (3×5) rather than ten. `Av_lime_v7.py` reads this file for the LIME ensemble weights.
 - **ResNet-18 and naive fusion** come from the older pipeline (`legacy_dl/`). They were evaluated in one 5-fold
@@ -135,6 +143,12 @@ manuscript stated.
 - **Figures 1–2 of the submitted version** were drawn by hand (see "Not produced by code"): Figure 1 has been
   redrawn and Figure 2 removed.
 - **Kaggle scores** were typed by hand (see "Not produced by code").
+- **Original SHAP run.** The SHAP values of the submitted manuscript (`V7_assets.json`; Appendix A, "Original SHAP
+  run") are not reproduced exactly by the released code: `diagnostics_r1/diag_shap_nonconstant.py`, which refits the
+  same four models (their definitions are read from `V7_assets.py`) on the same features, gives the same five
+  leading features but a mean pairwise Spearman correlation of 0.889 over all 149 features instead of 0.900. The
+  cause was not identified, and the package versions of the original run were not recorded. The revised manuscript
+  uses the re-run (Figure 3, Section 4.5.1); its package versions are stored in `diag_shap_nonconstant.json`.
 - **File checks in Table 1 and Section 3.1** (no coordinate reference system or geotransform in the GeoTIFF files;
   MS digital numbers 0–11,406; 111 training and 48 test HS files with 126 bands; RGB minimum 0 in every channel;
   30 MS tiles with zero-valued pixels) were computed interactively; there is no script.
