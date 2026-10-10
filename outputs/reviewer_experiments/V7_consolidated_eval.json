@@ -1,0 +1,116 @@
+{
+  "pipeline": "V7_149feat",
+  "protocol": "repeated 10x5 stratified CV, scaler in-fold, macro-F1-weighted soft voting",
+  "class_order": [
+    "Health",
+    "Other",
+    "Rust"
+  ],
+  "cv_macroF1_mean": 0.6681391218437588,
+  "cv_macroF1_std": 0.03582670752649461,
+  "ci95": [
+    0.6582481027933339,
+    0.6781543173020309
+  ],
+  "oof_macroF1": 0.6747785108163495,
+  "per_class": {
+    "Health": {
+      "P": 0.5912408759124088,
+      "R": 0.405,
+      "F1": 0.4807121661721068
+    },
+    "Other": {
+      "P": 0.8009478672985783,
+      "R": 0.845,
+      "F1": 0.8223844282238443
+    },
+    "Rust": {
+      "P": 0.6468253968253969,
+      "R": 0.815,
+      "F1": 0.7212389380530974
+    }
+  },
+  "confusion_matrix": [
+    [
+      81,
+      42,
+      77
+    ],
+    [
+      19,
+      169,
+      12
+    ],
+    [
+      37,
+      0,
+      163
+    ]
+  ],
+  "cm_rows_cols": [
+    "Health",
+    "Other",
+    "Rust"
+  ],
+  "health_recall_raw": 0.405,
+  "cost_sensitive_sweep": {
+    "1.00": {
+      "macroF1": 0.6747785108163495,
+      "health_recall": 0.405
+    },
+    "1.10": {
+      "macroF1": 0.6721182412358883,
+      "health_recall": 0.43
+    },
+    "1.20": {
+      "macroF1": 0.6691932553451525,
+      "health_recall": 0.46
+    },
+    "1.30": {
+      "macroF1": 0.678146265213258,
+      "health_recall": 0.495
+    },
+    "1.40": {
+      "macroF1": 0.6668182124334883,
+      "health_recall": 0.505
+    },
+    "1.50": {
+      "macroF1": 0.6622457096118203,
+      "health_recall": 0.535
+    },
+    "1.60": {
+      "macroF1": 0.6601780040652813,
+      "health_recall": 0.56
+    },
+    "1.70": {
+      "macroF1": 0.6437721173335748,
+      "health_recall": 0.57
+    },
+    "1.80": {
+      "macroF1": 0.646326834233811,
+      "health_recall": 0.61
+    },
+    "1.90": {
+      "macroF1": 0.6423527256437721,
+      "health_recall": 0.645
+    },
+    "2.00": {
+      "macroF1": 0.6374583465101015,
+      "health_recall": 0.685
+    }
+  },
+  "chosen_operating_point": {
+    "alpha": 1.25,
+    "macroF1": 0.673499463043699,
+    "health_recall": 0.475
+  },
+  "calibration": {
+    "raw_ECE": 0.023363000889750178,
+    "raw_Brier": 0.4202101319476502,
+    "isotonic_ECE": 0.05951402497673938,
+    "isotonic_Brier": 0.4325495832355428,
+    "conf_correct": 0.7058453783629689,
+    "conf_wrong": 0.6237941808034843
+  },
+  "n_features": 149
+}

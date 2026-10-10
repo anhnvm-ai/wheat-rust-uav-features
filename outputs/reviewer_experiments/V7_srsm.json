@@ -1,0 +1,50 @@
+{
+  "item": "srsm",
+  "n_prototypes": 6,
+  "srsm_dims": 100,
+  "note": "relative band positions (no wavelength file); prototypes label-free",
+  "configs": {
+    "HS_summary_70": {
+      "n_features": 70,
+      "macroF1_mean": 0.4460406590200155,
+      "macroF1_std": 0.035965125769151694,
+      "ci95": [
+        0.43628015251471347,
+        0.45635994446180006
+      ],
+      "oof_macroF1": 0.45446171340317293
+    },
+    "SRSM_HS": {
+      "n_features": 100,
+      "macroF1_mean": 0.4577926704640232,
+      "macroF1_std": 0.03910699166075347,
+      "ci95": [
+        0.4468910740515745,
+        0.4686928318323726
+      ],
+      "oof_macroF1": 0.47126325895912863
+    },
+    "MS_only": {
+      "n_features": 49,
+      "macroF1_mean": 0.6747823061365831,
+      "macroF1_std": 0.03444100110253325,
+      "ci95": [
+        0.6652435633478058,
+        0.6840726638980792
+      ],
+      "oof_macroF1": 0.6863959100317013
+    },
+    "MS_plus_SRSM": {
+      "n_features": 149,
+      "macroF1_mean": 0.6555009862533631,
+      "macroF1_std": 0.03638018496249359,
+      "ci95": [
+        0.6453277738353859,
+        0.6655079675310124
+      ],
+      "oof_macroF1": 0.6710107210656707
+    }
+  },
+  "srsm_vs_hs_summary_pp": 1.1752011444007726,
+  "ms_plus_srsm_vs_ms_pp": -1.9281319883220016
+}

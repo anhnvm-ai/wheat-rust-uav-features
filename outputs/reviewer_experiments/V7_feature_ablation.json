@@ -1,0 +1,30 @@
+[
+  {
+    "step": "Raw reflectance statistics only",
+    "n_features": 102,
+    "macroF1": 0.6455840069770249,
+    "std": 0.03398793452461291,
+    "delta_pp": null
+  },
+  {
+    "step": "+ Vegetation indices (MS)",
+    "n_features": 116,
+    "macroF1": 0.6718309730477063,
+    "std": 0.03579440854940177,
+    "delta_pp": 2.6246966070681443
+  },
+  {
+    "step": "+ Red-edge / spectral-shape (HS)",
+    "n_features": 132,
+    "macroF1": 0.6637277092053414,
+    "std": 0.031330439469776664,
+    "delta_pp": -0.8103263842364927
+  },
+  {
+    "step": "+ Colour indices, texture & CV (RGB+MS)  [Full V7]",
+    "n_features": 149,
+    "macroF1": 0.664246388417928,
+    "std": 0.03367873736369017,
+    "delta_pp": 0.051867921258663685
+  }
+]

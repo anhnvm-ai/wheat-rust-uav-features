@@ -1,0 +1,21 @@
+# Versions in the environment where B2_mlp_v7.py was run (Python 3.13.15, Oct 2026).
+# Earlier scripts were run in Colab (May-June 2026); their exact versions were not recorded.
+numpy==2.1.3
+pandas==2.2.3
+scipy==1.16.3
+scikit-learn==1.6.1
+threadpoolctl==3.7.0
+lightgbm==4.6.0
+xgboost==3.4.1
+shap==0.52.0
+lime                      # Av_lime_v7.py only; version not recorded
+matplotlib==3.10.0
+seaborn==0.13.2
+opencv-python==5.0.0.93
+tifffile==2026.9.20
+rasterio==1.5.2
+Pillow==11.3.0
+tqdm==4.67.3
+# GPU baselines (B1_dl_baseline.py, legacy_dl/)
+torch==2.11.0
+torchvision==0.26.0

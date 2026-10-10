@@ -1,0 +1,25 @@
+{
+  "item": "compact30_submission",
+  "note": "leaderboard closed / no local test labels -> agreement proxy, not a new private score",
+  "reference_submission": "submission_V7_repro.csv (private 0.790, public 0.653, md5 4bba408f)",
+  "full149_repro_agreement_vs_ref": 1.0,
+  "compact30_agreement_vs_ref(0.790)": 0.92,
+  "compact30_agreement_vs_full149_repro": 0.92,
+  "dist_reference_0790": {
+    "Health": 73,
+    "Other": 98,
+    "Rust": 129
+  },
+  "dist_full149_repro": {
+    "Health": 73,
+    "Other": 98,
+    "Rust": 129
+  },
+  "dist_compact30": {
+    "Health": 76,
+    "Other": 96,
+    "Rust": 128
+  },
+  "rust_count_reference": 129,
+  "rust_count_compact30": 128
+}

@@ -1,0 +1,91 @@
+{
+  "mean_local_R2": 0.27432298296658014,
+  "median_local_R2": 0.24252587717603596,
+  "std": 0.1245617255623871,
+  "per_class_mean_R2": {
+    "Health": 0.2141937620860916,
+    "Other": 0.3860028046618006,
+    "Rust": 0.1978197274950444
+  },
+  "n_instances": 120,
+  "top_features_by_class": {
+    "Health": [
+      [
+        "rgb_grad_std",
+        1.118
+      ],
+      [
+        "ms_red_min",
+        0.723
+      ],
+      [
+        "ms_blue_min",
+        0.692
+      ],
+      [
+        "ms_NDVI",
+        0.676
+      ],
+      [
+        "ms_NDRE",
+        0.583
+      ],
+      [
+        "rgb_grad_mean",
+        0.574
+      ]
+    ],
+    "Other": [
+      [
+        "ms_NDRE",
+        2.607
+      ],
+      [
+        "ms_blue_min",
+        2.43
+      ],
+      [
+        "ms_NDVI",
+        2.394
+      ],
+      [
+        "ms_CIre",
+        2.236
+      ],
+      [
+        "ms_NDWI",
+        1.945
+      ],
+      [
+        "ms_red_min",
+        1.917
+      ]
+    ],
+    "Rust": [
+      [
+        "ms_NDVI",
+        2.39
+      ],
+      [
+        "ms_GNDVI",
+        1.069
+      ],
+      [
+        "ms_SAVI",
+        0.946
+      ],
+      [
+        "ms_NDRE",
+        0.924
+      ],
+      [
+        "ms_NDWI",
+        0.657
+      ],
+      [
+        "ms_CIre",
+        0.615
+      ]
+    ]
+  }
+}

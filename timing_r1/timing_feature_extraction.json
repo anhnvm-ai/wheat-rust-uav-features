@@ -1,0 +1,113 @@
+{
+  "what": "V7 feature extraction timing (file reading + 149 features), no model training",
+  "extractor": "code/feat_v7_lib.py (load_sample + extract_rgb/ms/hs_raw_features; HS block as submitted)",
+  "repeats": 3,
+  "threads": 1,
+  "page_cache_dropped_before_each_repeat": [
+    false,
+    false,
+    false
+  ],
+  "storage": "/tmp/claude-0/-content-drive-MyDrive-Kaggle-Prepared/eb460080-3760-45f4-84e2-bae3c500f1bd/scratchpad/data_local",
+  "cpu_model": "Intel(R) Xeon(R) CPU @ 2.20GHz",
+  "logical_cpus": 2,
+  "python": "3.13.16",
+  "numpy": "2.1.3",
+  "opencv": "5.0.0",
+  "tifffile": "2026.9.20",
+  "sanity_check_vs_features_v7_csv": {
+    "n_compared": 600,
+    "max_abs_diff": 0.0
+  },
+  "summary_median_over_repeats": {
+    "train": {
+      "read_ms_per_tile": 2.7823580049638017,
+      "features_ms_per_tile": 8.168896143385306,
+      "total_ms_per_tile": 10.951254148349108
+    },
+    "test": {
+      "read_ms_per_tile": 2.0448636598302983,
+      "features_ms_per_tile": 5.947235089818908,
+      "total_ms_per_tile": 7.970570719796039
+    },
+    "all_tiles": {
+      "n_tiles": 900,
+      "read_s_median": 2.383125002103043,
+      "features_s_median": 7.165140670942492
+    }
+  },
+  "runs": [
+    {
+      "train": {
+        "n_tiles": 600,
+        "read_s": 1.2766799959572381,
+        "features_s": 3.5492430950616836,
+        "rgb_s": 1.3247809440945275,
+        "ms_s": 1.6641909629834117,
+        "hs_s": 0.5602711879837443,
+        "read_ms_per_tile": 2.1277999932620637,
+        "features_ms_per_tile": 5.91540515843614,
+        "total_ms_per_tile": 8.043205151698203
+      },
+      "test": {
+        "n_tiles": 300,
+        "read_s": 0.6134590979490895,
+        "features_s": 1.7777121179897222,
+        "rgb_s": 0.6558082821065909,
+        "ms_s": 0.8442928749645944,
+        "hs_s": 0.2776109609185369,
+        "read_ms_per_tile": 2.0448636598302983,
+        "features_ms_per_tile": 5.925707059965741,
+        "total_ms_per_tile": 7.970570719796039
+      }
+    },
+    {
+      "train": {
+        "n_tiles": 600,
+        "read_s": 1.669414802978281,
+        "features_s": 4.901337686031184,
+        "rgb_s": 1.790413949987851,
+        "ms_s": 2.3216941360660712,
+        "hs_s": 0.7892295999772614,
+        "read_ms_per_tile": 2.7823580049638017,
+        "features_ms_per_tile": 8.168896143385306,
+        "total_ms_per_tile": 10.951254148349108
+      },
+      "test": {
+        "n_tiles": 300,
+        "read_s": 0.8640214059341815,
+        "features_s": 2.6189308570101275,
+        "rgb_s": 0.9440567400306463,
+        "ms_s": 1.2484616850415478,
+        "hs_s": 0.42641243193793343,
+        "read_ms_per_tile": 2.8800713531139386,
+        "features_ms_per_tile": 8.729769523367091,
+        "total_ms_per_tile": 11.60984087648103
+      }
+    },
+    {
+      "train": {
+        "n_tiles": 600,
+        "read_s": 1.7780713690590346,
+        "features_s": 5.380970143996819,
+        "rgb_s": 1.9519268919466413,
+        "ms_s": 2.5805217139131855,
+        "hs_s": 0.8485215381369926,
+        "read_ms_per_tile": 2.9634522817650577,
+        "features_ms_per_tile": 8.968283573328032,
+        "total_ms_per_tile": 11.93173585509309
+      },
+      "test": {
+        "n_tiles": 300,
+        "read_s": 0.6050536330440082,
+        "features_s": 1.7841705269456725,
+        "rgb_s": 0.6590452419986832,
+        "ms_s": 0.8424725829900126,
+        "hs_s": 0.28265270195697667,
+        "read_ms_per_tile": 2.0168454434800274,
+        "features_ms_per_tile": 5.947235089818908,
+        "total_ms_per_tile": 7.964080533298936
+      }
+    }
+  ]
+}

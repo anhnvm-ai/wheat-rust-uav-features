@@ -1,0 +1,205 @@
+{
+  "item": "compact_feature_selection",
+  "protocol": "in-fold LightGBM-gain ranking, top-K, repeated 10x5 CV macro-F1-weighted ensemble (locked V7 protocol)",
+  "n_total_features": 149,
+  "K_grid": [
+    10,
+    20,
+    30,
+    50,
+    70,
+    100,
+    149
+  ],
+  "curve": {
+    "10": {
+      "macroF1": 0.6558087176040366,
+      "std": 0.03927073813043557,
+      "ci95": [
+        0.6451637049495828,
+        0.6670116975012269
+      ],
+      "retention_pct": 98.04106801100421
+    },
+    "20": {
+      "macroF1": 0.6575832808201071,
+      "std": 0.03918702982865421,
+      "ci95": [
+        0.6467252104710461,
+        0.6684544788805462
+      ],
+      "retention_pct": 98.30635889276044
+    },
+    "30": {
+      "macroF1": 0.6661045520614182,
+      "std": 0.040070252799207624,
+      "ci95": [
+        0.6546219922159713,
+        0.6770057268277085
+      ],
+      "retention_pct": 99.58025859992173
+    },
+    "50": {
+      "macroF1": 0.6721530720380834,
+      "std": 0.038338672570765495,
+      "ci95": [
+        0.6615806627066974,
+        0.6827771685896631
+      ],
+      "retention_pct": 100.48449079824421
+    },
+    "70": {
+      "macroF1": 0.6685784673956618,
+      "std": 0.03519455890194436,
+      "ci95": [
+        0.6590577416074471,
+        0.6786061067310454
+      ],
+      "retention_pct": 99.95010013302024
+    },
+    "100": {
+      "macroF1": 0.6688342435259753,
+      "std": 0.03717439254613775,
+      "ci95": [
+        0.659075414202503,
+        0.6791280987842852
+      ],
+      "retention_pct": 99.98833775370828
+    },
+    "149": {
+      "macroF1": 0.6689122537204797,
+      "std": 0.03656203805734494,
+      "ci95": [
+        0.6585731398169974,
+        0.6790624276510804
+      ],
+      "retention_pct": 100.0
+    }
+  },
+  "full_macroF1": 0.6689122537204797,
+  "compact_30_macroF1": 0.6661045520614182,
+  "compact_30_retention_pct": 99.58025859992173,
+  "compact_20_macroF1": 0.6575832808201071,
+  "compact_20_retention_pct": 98.30635889276044,
+  "stability": {
+    "mean_pairwise_jaccard": 0.5439979763164801,
+    "n_features_ever_in_top30": 62,
+    "features_in_all_folds": 6,
+    "frequency_top40": {
+      "rgb_hue_std": 50,
+      "ms_MTCI": 50,
+      "rgb_grad_std": 50,
+      "ms_NDRE": 50,
+      "hs_d1_max": 50,
+      "hs_AUC2": 50,
+      "rgb_grad_mean": 49,
+      "ms_red_std": 49,
+      "rgb_grad_max": 47,
+      "rgb_R_std": 47,
+      "rgb_hue_mean": 45,
+      "ms_nir_min": 43,
+      "hs_d1_std": 42,
+      "ms_red_min": 41,
+      "rgb_B_std": 39,
+      "rgb_R_p75": 38,
+      "ms_blue_max": 37,
+      "ms_CV_b2": 36,
+      "hs_d1_mean": 35,
+      "ms_EVI": 34,
+      "ms_CIre": 33,
+      "rgb_R/B": 32,
+      "rgb_G_std": 32,
+      "rgb_G_mean": 31,
+      "ms_blue_std": 29,
+      "ms_blue_min": 29,
+      "hs_std": 28,
+      "ms_green_std": 28,
+      "ms_green_min": 27,
+      "ms_nir_max": 24,
+      "ms_CV_b1": 22,
+      "ms_GNDVI": 22,
+      "rgb_G/B": 21,
+      "rgb_G_p75": 21,
+      "hs_AUC1": 20,
+      "rgb_G_p25": 20,
+      "ms_NDVI": 18,
+      "hs_d1_maxpos": 18,
+      "ms_blue_p90": 17,
+      "ms_CV_b4": 14
+    }
+  },
+  "global_top30": [
+    "ms_MTCI",
+    "hs_d1_max",
+    "ms_NDRE",
+    "rgb_hue_std",
+    "hs_AUC2",
+    "rgb_grad_mean",
+    "rgb_grad_std",
+    "ms_nir_min",
+    "rgb_R/B",
+    "ms_EVI",
+    "ms_red_min",
+    "rgb_hue_mean",
+    "rgb_R_p75",
+    "ms_CV_b2",
+    "ms_red_std",
+    "ms_blue_max",
+    "hs_d1_std",
+    "rgb_R_std",
+    "ms_CIre",
+    "ms_blue_std",
+    "ms_NDVI",
+    "hs_d1_mean",
+    "hs_std",
+    "rgb_G_std",
+    "rgb_B_std",
+    "ms_NDWI",
+    "hs_range",
+    "rgb_G_mean",
+    "rgb_grad_max",
+    "ms_blue_min"
+  ],
+  "global_top20": [
+    "ms_MTCI",
+    "hs_d1_max",
+    "ms_NDRE",
+    "rgb_hue_std",
+    "hs_AUC2",
+    "rgb_grad_mean",
+    "rgb_grad_std",
+    "ms_nir_min",
+    "rgb_R/B",
+    "ms_EVI",
+    "ms_red_min",
+    "rgb_hue_mean",
+    "rgb_R_p75",
+    "ms_CV_b2",
+    "ms_red_std",
+    "ms_blue_max",
+    "hs_d1_std",
+    "rgb_R_std",
+    "ms_CIre",
+    "ms_blue_std"
+  ],
+  "cost": {
+    "full_149": {
+      "n_features": 149,
+      "train_seconds": 6.136479377746582,
+      "infer_ms_per_sample": 0.22793889045715332,
+      "model_size_kb": 4052.7197265625
+    },
+    "compact_30": {
+      "n_features": 30,
+      "train_seconds": 2.44637131690979,
+      "infer_ms_per_sample": 0.13313929239908853,
+      "model_size_kb": 3564.482421875
+    },
+    "compact_20": {
+      "n_features": 20,
+      "train_seconds": 1.8676035404205322,
+      "infer_ms_per_sample": 0.12399752934773763,
+      "model_size_kb": 3444.57421875
+    }
+  }
+}

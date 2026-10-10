@@ -1,0 +1,55 @@
+{
+  "item": "canopy_aware_roi",
+  "mask": "Otsu-on-NDVI canopy mask, stats over canopy pixels",
+  "protocol": "repeated 10x5 CV, locked V7 ensemble",
+  "configs": {
+    "A_full_tile": {
+      "n_features": 149,
+      "macroF1_mean": 0.6681391218437588,
+      "macroF1_std": 0.03582670752649461,
+      "ci95": [
+        0.6582481027933339,
+        0.6781543173020309
+      ],
+      "oof_macroF1": 0.6747785108163495,
+      "per_class_F1": {
+        "Health": 0.4807121661721068,
+        "Other": 0.8223844282238443,
+        "Rust": 0.7212389380530974
+      },
+      "delta_vs_full_pp": 0.0
+    },
+    "B_canopy_masked": {
+      "n_features": 149,
+      "macroF1_mean": 0.6479221059850775,
+      "macroF1_std": 0.04081036766007984,
+      "ci95": [
+        0.6365735272491666,
+        0.6593989497989836
+      ],
+      "oof_macroF1": 0.6568726624975445,
+      "per_class_F1": {
+        "Health": 0.46956521739130436,
+        "Other": 0.7941176470588235,
+        "Rust": 0.7069351230425056
+      },
+      "delta_vs_full_pp": -2.0217015858681298
+    },
+    "C_canopy_plus": {
+      "n_features": 161,
+      "macroF1_mean": 0.6672783644795435,
+      "macroF1_std": 0.03870261223801942,
+      "ci95": [
+        0.6563367272393554,
+        0.6780564980386518
+      ],
+      "oof_macroF1": 0.6625884655925313,
+      "per_class_F1": {
+        "Health": 0.4642857142857143,
+        "Other": 0.8029556650246306,
+        "Rust": 0.7205240174672489
+      },
+      "delta_vs_full_pp": -0.08607573642153143
+    }
+  }
+}

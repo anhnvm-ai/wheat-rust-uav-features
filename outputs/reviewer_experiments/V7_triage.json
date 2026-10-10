@@ -1,0 +1,168 @@
+{
+  "item": "selective_triage_uncertainty",
+  "n": 600,
+  "uncertainty_measures": [
+    "max_prob_confidence",
+    "predictive_entropy"
+  ],
+  "note": "abstain on lowest-confidence (1-coverage) fraction; abstained = referred to agronomist",
+  "risk_coverage_table": {
+    "1.00": {
+      "coverage": 1.0,
+      "n_auto": 600,
+      "n_referred": 0,
+      "macroF1": 0.6747785108163495,
+      "accuracy": 0.6883333333333334,
+      "rust_miss_rate": 0.18500000000000005,
+      "health_precision": 0.5912408759124088,
+      "health_recall": 0.405,
+      "ECE": 0.023363000889750154,
+      "referred_composition": {
+        "Health": 0,
+        "Other": 0,
+        "Rust": 0
+      }
+    },
+    "0.95": {
+      "coverage": 0.95,
+      "n_auto": 570,
+      "n_referred": 30,
+      "macroF1": 0.6740213662721701,
+      "accuracy": 0.6912280701754386,
+      "rust_miss_rate": 0.1842105263157895,
+      "health_precision": 0.5934959349593496,
+      "health_recall": 0.3882978723404255,
+      "ECE": 0.015478765281812187,
+      "referred_composition": {
+        "Health": 12,
+        "Other": 8,
+        "Rust": 10
+      }
+    },
+    "0.90": {
+      "coverage": 0.9,
+      "n_auto": 540,
+      "n_referred": 60,
+      "macroF1": 0.6841262912847373,
+      "accuracy": 0.7037037037037037,
+      "rust_miss_rate": 0.14117647058823535,
+      "health_precision": 0.6422018348623854,
+      "health_recall": 0.3867403314917127,
+      "ECE": 0.01797053978250174,
+      "referred_composition": {
+        "Health": 19,
+        "Other": 11,
+        "Rust": 30
+      }
+    },
+    "0.85": {
+      "coverage": 0.85,
+      "n_auto": 510,
+      "n_referred": 90,
+      "macroF1": 0.7005080327906281,
+      "accuracy": 0.7235294117647059,
+      "rust_miss_rate": 0.1132075471698113,
+      "health_precision": 0.6947368421052632,
+      "health_recall": 0.39285714285714285,
+      "ECE": 0.027555940679859156,
+      "referred_composition": {
+        "Health": 32,
+        "Other": 17,
+        "Rust": 41
+      }
+    },
+    "0.80": {
+      "coverage": 0.8,
+      "n_auto": 480,
+      "n_referred": 120,
+      "macroF1": 0.7041702240153459,
+      "accuracy": 0.7333333333333333,
+      "rust_miss_rate": 0.08843537414965985,
+      "health_precision": 0.7160493827160493,
+      "health_recall": 0.37662337662337664,
+      "ECE": 0.02696591936183904,
+      "referred_composition": {
+        "Health": 46,
+        "Other": 21,
+        "Rust": 53
+      }
+    },
+    "0.75": {
+      "coverage": 0.75,
+      "n_auto": 450,
+      "n_referred": 150,
+      "macroF1": 0.6991789323849575,
+      "accuracy": 0.7377777777777778,
+      "rust_miss_rate": 0.08759124087591241,
+      "health_precision": 0.7058823529411765,
+      "health_recall": 0.34782608695652173,
+      "ECE": 0.021065665371993624,
+      "referred_composition": {
+        "Health": 62,
+        "Other": 25,
+        "Rust": 63
+      }
+    },
+    "0.70": {
+      "coverage": 0.7,
+      "n_auto": 420,
+      "n_referred": 180,
+      "macroF1": 0.6882438959208251,
+      "accuracy": 0.7357142857142858,
+      "rust_miss_rate": 0.09756097560975607,
+      "health_precision": 0.6779661016949152,
+      "health_recall": 0.3225806451612903,
+      "ECE": 0.02146689628801387,
+      "referred_composition": {
+        "Health": 76,
+        "Other": 27,
+        "Rust": 77
+      }
+    },
+    "0.60": {
+      "coverage": 0.6,
+      "n_auto": 360,
+      "n_referred": 240,
+      "macroF1": 0.712638008974805,
+      "accuracy": 0.7694444444444445,
+      "rust_miss_rate": 0.06930693069306926,
+      "health_precision": 0.7674418604651163,
+      "health_recall": 0.33,
+      "ECE": 0.012643526237409525,
+      "referred_composition": {
+        "Health": 100,
+        "Other": 41,
+        "Rust": 99
+      }
+    },
+    "0.50": {
+      "coverage": 0.5,
+      "n_auto": 300,
+      "n_referred": 300,
+      "macroF1": 0.7209661835748792,
+      "accuracy": 0.7833333333333333,
+      "rust_miss_rate": 0.0864197530864198,
+      "health_precision": 0.7714285714285715,
+      "health_recall": 0.3375,
+      "ECE": 0.02624356171261268,
+      "referred_composition": {
+        "Health": 120,
+        "Other": 61,
+        "Rust": 119
+      }
+    }
+  },
+  "summary": {
+    "full_macroF1": 0.6747785108163495,
+    "full_accuracy": 0.6883333333333334,
+    "at80_macroF1": 0.7041702240153459,
+    "at80_accuracy": 0.7333333333333333,
+    "macroF1_gain_at80": 0.02939171319899636,
+    "accuracy_gain_at80": 0.04499999999999993,
+    "rust_miss_full": 0.18500000000000005,
+    "rust_miss_at80": 0.08843537414965985,
+    "referred_at80_health_plus_rust_frac": 0.825
+  },
+  "mean_entropy_correct": 0.6704403485701449,
+  "mean_entropy_wrong": 0.781373200748313
+}
