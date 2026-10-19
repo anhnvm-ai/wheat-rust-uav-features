@@ -1,4 +1,4 @@
-# Code — Compact Red-Edge Features and Selective Prediction for Explainable UAV Wheat-Rust Scouting
+# Code — Compact Red-Edge Features and Selective Prediction for UAV Wheat-Rust Scouting
 
 These scripts produce the computed results of the manuscript (`main.tex`, Elsevier cas-dc), except the
 items listed under Known gaps.
@@ -24,8 +24,8 @@ below are included in `outputs/`.
 called `ROOT_DIR`. Edit that line to run the code somewhere else.
 
 **Packages.** See `requirements.txt`. `Av_lime_v7.py` also needs `pip install lime`.
-`B1_dl_baseline.py`, `diagnostics_r1/diag_dl_earlystop.py`, `diagnostics_r1/diag_dl_protoC.py` and `legacy_dl/`
-need a GPU. Everything else runs on CPU.
+`B1_dl_baseline.py`, `diagnostics_r1/diag_dl_earlystop.py`, `diagnostics_r1/diag_dl_protoC.py`,
+`diagnostics_r1/exp_B_dl_protocolB_10x5.py` and `legacy_dl/` need a GPU. Everything else runs on CPU.
 
 Run the scripts from any directory. They import `feat_v7_lib.py` and `r2_lib.py` from this folder.
 All evaluations use the same fixed protocol (defined in `r2_lib.py`):
@@ -34,7 +34,7 @@ All evaluations use the same fixed protocol (defined in `r2_lib.py`):
 - class order fixed as Health, Other, Rust;
 - seed 42;
 - the folds of every repetition are listed in `folds_10x5.csv` (written by `make_folds_10x5.py`); the fair
-  deep baseline uses repetition 0.
+  deep baseline uses all 50 folds (its first, five-fold runs used repetition 0).
 
 ## Which script produces what
 
@@ -67,12 +67,14 @@ All evaluations use the same fixed protocol (defined in `r2_lib.py`):
 | Manuscript item | Script | Output |
 |---|---|---|
 | Fixed folds of the 10×5 protocol (6,000 rows: `sample_id`, `label`, `repetition`, `fold`) | `make_folds_10x5.py` | `folds_10x5.csv` (this folder) |
-| Table 6 (`tab:main_results`), weighted ensemble with nested weights; Table 8 (`tab:ablation`), panel (c), HS block recomputed in the stored cube orientation; Table A2 (`tab:checks`), panel (a), nested α and selective-prediction cut-off | `diagnostics_r1/diag_leakage_hs.py` | `diagnostics_r1/diag_leakage_hs.json` |
-| Table 6, panel (b) (paired comparison with the fair deep network on the folds of repetition 0); Table 7 (`tab:perclass`), ensemble row (aggregated out-of-fold probabilities with nested weights); Table 12 (`tab:operating`), Health-prior weight α with nested selection; Tables 13 (`tab:triage`) and 14 (`tab:triagecm`), selective prediction with nested cut-offs | `diagnostics_r1/diag_nested_perfold.py` (re-runs the nested part of `diag_leakage_hs.py` for the evaluated pipeline and also stores the score, probabilities and selective-prediction results of every outer fold; it stops unless its means equal those stored in `diag_leakage_hs.json`), then `diagnostics_r1/summarise_nested_rerun.py` (also reads `diag_dl_earlystop.json` and `diag_dl_protoC.json`; fits no model) | `diagnostics_r1/diag_nested_perfold.json`, `diagnostics_r1/diag_nested_perfold_probs.npz`, `diagnostics_r1/nested_rerun_summary.json` |
+| Table 6 (`tab:main_results`), weighted ensemble with nested weights; Table A2 (`tab:checks`), panel (a), nested α and selective-prediction cut-off; reference values for the gates of `exp_A_corrected_hs_nested.py` | `diagnostics_r1/diag_leakage_hs.py` | `diagnostics_r1/diag_leakage_hs.json` |
+| Table 8 (`tab:ablation`), panel (c), and the corrected-HS row of Table 17: seven feature configurations (HS block as submitted or recomputed in the stored cube orientation) under the primary nested protocol, with corrected CIs and the two paired differences fixed in advance | `diagnostics_r1/exp_A_corrected_hs_nested.py` (pre-registered in `diagnostics_r1/PREREG_final_robustness.md`; its summary step checks gates G1–G3 against `diag_nested_perfold.json` and `diag_leakage_hs.json`) | `diagnostics_r1/exp_A_summary.json`, `diagnostics_r1/exp_A_folds.jsonl`, `diagnostics_r1/exp_A_probs.jsonl` |
+| Per-fold ensemble scores used by the paired comparisons (Table 6, panel (b); Table A2, panel (b), note); Table 7 (`tab:perclass`), ensemble row (aggregated out-of-fold probabilities with nested weights); Table 12 (`tab:operating`), Health-prior weight α with nested selection; Tables 13 (`tab:triage`) and 14 (`tab:triagecm`), selective prediction with nested cut-offs | `diagnostics_r1/diag_nested_perfold.py` (re-runs the nested part of `diag_leakage_hs.py` for the evaluated pipeline and also stores the score, probabilities and selective-prediction results of every outer fold; it stops unless its means equal those stored in `diag_leakage_hs.json`), then `diagnostics_r1/summarise_nested_rerun.py` (also reads `diag_dl_earlystop.json` and `diag_dl_protoC.json`; fits no model) | `diagnostics_r1/diag_nested_perfold.json`, `diagnostics_r1/diag_nested_perfold_probs.npz`, `diagnostics_r1/nested_rerun_summary.json` |
 | Figure 6 (`fig:triage`) | `figures_r1/fig_risk_coverage_r2.py` (reads `nested_rerun_summary.json`) | `V7_risk_coverage_r2.png` |
 | Figure 3 (`fig:shap`) and the SHAP values of Section 4.5.1 (re-run of the SHAP step of `V7_assets.py`; agreement over all and over the non-constant features; package versions stored in the output) | `diagnostics_r1/diag_shap_nonconstant.py`, then `figures_r1/fig_shap_r2.py` | `diagnostics_r1/diag_shap_nonconstant.json`, `V7_shap_permodality_r2.png` |
-| Tables 6, 7 and 16, fair multimodal DL, protocol B (early stopping on an inner 15% split); Table A1 (same rule as submitted, re-run); Table A2, panel (b) | `diagnostics_r1/diag_dl_earlystop.py` (GPU) | `diagnostics_r1/diag_dl_earlystop.json` |
-| Table 6, fair multimodal DL, protocol C (retrained on the full training fold); Table A2, panel (b) | `diagnostics_r1/diag_dl_protoC.py` (GPU) | `diagnostics_r1/diag_dl_protoC.json` |
+| Tables 6 (panels (a) and (b)), 7 and 16, fair multimodal DL, protocol B (early stopping on an inner 15% split) on all 50 folds with three seeds per fold; Appendix A (repetition-0 check) | `diagnostics_r1/exp_B_dl_protocolB_10x5.py` (GPU; pre-registered in `diagnostics_r1/PREREG_final_robustness.md`) | `diagnostics_r1/exp_B_summary.json`, `diagnostics_r1/exp_B_seedlevel.jsonl`, `diagnostics_r1/exp_B_summary_rep0_gateF2.json` (summary after repetition 0, gate F2) |
+| Table A2, panel (b), protocol B on the five folds of repetition 0 (first run; reference of gate F2); Table A1 (same rule as submitted, re-run); training time on an A100 (Table 16, note a) | `diagnostics_r1/diag_dl_earlystop.py` (GPU) | `diagnostics_r1/diag_dl_earlystop.json` |
+| Table A2, panel (b), protocol C (retrained on the full training fold; five folds of repetition 0) | `diagnostics_r1/diag_dl_protoC.py` (GPU) | `diagnostics_r1/diag_dl_protoC.json` |
 | Tables 6, 7 and 16, MLP (256-128-3) on the 149 features | `B2_mlp_v7.py` | `outputs/reviewer_experiments/B2_mlp_v7.json` |
 | Table 16 (`tab:compute`), feature-extraction time | `timing_r1/time_feature_extraction.py` | `timing_r1/timing_feature_extraction.json` |
 
@@ -110,6 +112,12 @@ run in minutes.
     finished folds are kept in a checkpoint file, so an interrupted run resumes), then
     `diagnostics_r1/summarise_nested_rerun.py` and `figures_r1/fig_risk_coverage_r2.py`;
     `diagnostics_r1/diag_shap_nonconstant.py`, then `figures_r1/fig_shap_r2.py`.
+11. Final robustness experiments (protocols, gates and wording fixed in advance in
+    `diagnostics_r1/PREREG_final_robustness.md`, git tag `pre_final_robustness`):
+    `diagnostics_r1/exp_A_corrected_hs_nested.py <out_dir> run S0 S1 S1b S2 S3 S4 S5` **[raw]**, then `summarise`
+    (CPU; about 100 min with 2 jobs, set `NJOBS`); on a GPU, `diagnostics_r1/exp_B_dl_protocolB_10x5.py <out_dir> run 0`
+    **[raw]** and `summarise` (gate F2), then `run 1-9` and `summarise` (about 30 min on a Tesla T4). Both scripts keep
+    finished folds in a checkpoint file, so an interrupted run resumes.
 
 ## HS block: loader axis order
 
@@ -118,8 +126,8 @@ stored as 32×32×125 (or 126) bands, so the loader turns them into 32×125×32,
 averages over columns and bands. The "mean spectrum" of the HS block is therefore a band-averaged intensity
 profile over pixel rows (rows 11–18 after trimming), and 47 of the 70 HS entries are constant. The code is kept
 unchanged, with a comment at the loader, so that the features match the evaluated pipeline (manuscript,
-Section 3.4.3). `diagnostics_r1/diag_leakage_hs.py` recomputes the HS block with each cube read in its stored
-orientation (Table 8, panel (c)).
+Section 3.4.3). `diagnostics_r1/diag_leakage_hs.py` and `diagnostics_r1/exp_A_corrected_hs_nested.py` recompute the HS
+block with each cube read in its stored orientation; Table 8, panel (c), reports the latter (primary nested protocol).
 
 ## Known gaps
 
@@ -134,7 +142,7 @@ manuscript stated.
   reconstructed exactly.
 - **Cost table.** The submitted `tab:compute` contained timings and parameter counts that no script measured. The
   revised table reports only measured values (`timing_r1/time_feature_extraction.py`, `R2_compact.py`,
-  `B2_mlp_v7.py`, `diagnostics_r1/diag_dl_earlystop.py`).
+  `B2_mlp_v7.py`, `diagnostics_r1/exp_B_dl_protocolB_10x5.py`, `diagnostics_r1/diag_dl_earlystop.py`).
 - **Wilcoxon test.** The Wilcoxon signed-rank test cited in the submitted version was never run; it has been
   removed from the manuscript.
 - **`tab:competition` of the submitted version.** The 112/300 row was a late submission from an older 311-feature
@@ -162,5 +170,6 @@ manuscript stated.
 
 `B2_mlp_v7.py` was run in October 2026 with the package versions pinned in `requirements.txt`. Its sanity check
 reproduced the earlier 226-feature MLP number exactly (62.89% ± 3.2). The scripts in `diagnostics_r1/` and
-`timing_r1/` and `make_folds_10x5.py` were also run in Google Colab in October 2026. The other scripts were run
+`timing_r1/` and `make_folds_10x5.py` were also run in Google Colab in October 2026; `environment_postreview.txt`
+lists the package versions and hardware of the final post-review runs (`exp_A_*`, `exp_B_*`). The other scripts were run
 in Google Colab in May–June 2026. Their package versions were not recorded.

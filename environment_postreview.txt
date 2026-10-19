@@ -1,0 +1,25 @@
+# Environment of the final post-review analyses (19 October 2026, Google Colab)
+# Measured while running diagnostics_r1/exp_A_corrected_hs_nested.py and diagnostics_r1/exp_B_dl_protocolB_10x5.py
+# (pre-registered in diagnostics_r1/PREREG_final_robustness.md, git tag pre_final_robustness).
+# The versions are also stored in exp_A_summary.json and exp_B_summary.json ("versions").
+# The other October 2026 scripts in diagnostics_r1/ and timing_r1/ store their versions in their own output files
+# where available; requirements.txt lists the versions pinned for B2_mlp_v7.py.
+
+# System
+#   OS: Ubuntu 24.04.4 LTS; CPU: Intel Xeon @ 2.00 GHz, 2 vCPUs (Experiment A: 2 jobs, one thread each)
+#   GPU (Experiment B): NVIDIA Tesla T4, driver 580.82.07, CUDA 13.0, cuDNN 9.27 (deterministic mode)
+python==3.13.15
+numpy==2.1.3
+pandas==2.2.3
+scipy==1.16.3
+scikit-learn==1.6.1
+threadpoolctl==3.7.0
+joblib==1.6.0
+lightgbm==4.6.0
+xgboost==3.4.1
+shap==0.52.0
+tifffile==2026.9.20
+rasterio==1.5.2
+Pillow==11.3.0
+torch==2.11.0+cu130
+torchvision==0.26.0+cu130
