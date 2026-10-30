@@ -1,0 +1,15 @@
+{
+ "folds_equal_folds_10x5": true,
+ "svm_gamma_scale_rule": {
+  "sklearn": 0.010101010101010102,
+  "ours": 0.010101010101010102
+ },
+ "grid_sizes": {
+  "LightGBM": 9,
+  "XGBoost": 9,
+  "RandomForest": 9,
+  "ExtraTrees": 9,
+  "SVM": 9
+ },
+ "pass": true
+}

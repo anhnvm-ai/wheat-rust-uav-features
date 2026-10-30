@@ -1,0 +1,51 @@
+{
+ "deep_network_rep0": {
+  "means": {
+   "A_scored_fold_epoch": 0.7058018279641302,
+   "B_inner_earlystop": 0.6517920548237065,
+   "C_inner_epochs_retrain": 0.6542989550598228
+  },
+  "A_minus_C": {
+   "mean": 0.05150287290430716,
+   "ci95": [
+    0.012405797823249305,
+    0.09059994798536503
+   ],
+   "p_two_sided": 0.02162920285176093,
+   "J": 5,
+   "folds_A_higher": 5
+  },
+  "A_minus_B": {
+   "mean": 0.054009773140423635,
+   "ci95": [
+    0.012234930545576665,
+    0.09578461573527061
+   ],
+   "p_two_sided": 0.022969918902444732,
+   "J": 5,
+   "folds_A_higher": 5
+  }
+ },
+ "ensemble_50folds": {
+  "means": {
+   "scored_fold_weights": 0.6684118653984585,
+   "nested_weights": 0.6672084104320107
+  },
+  "scored_minus_nested": {
+   "mean": 0.001203454966447599,
+   "ci95": [
+    -0.003202783122831178,
+    0.005609693055726376
+   ],
+   "p_two_sided": 0.5855900676531294,
+   "J": 50,
+   "folds_higher": 8,
+   "folds_identical": 39,
+   "folds_lower": 3
+  },
+  "nested_weight_ratio_max_over_min": [
+   1.0139438094070325,
+   1.1076475939363546
+  ]
+ }
+}

@@ -1,0 +1,11 @@
+{
+ "date": "2026-10-30",
+ "what": "original V7_assets.py cv_f1/mdls copied verbatim, current environment, 3x5, weights on the scored fold",
+ "without_HS_now": 0.66778,
+ "full_now": 0.66255,
+ "gate_script_without_HS": 0.6677751475154666,
+ "gate_script_full": 0.6625459282762539,
+ "published_without_HS": 0.6623202977267586,
+ "published_full": 0.6637330462095499,
+ "conclusion": "gate script equals the original code; the difference to the published values is environment drift"
+}

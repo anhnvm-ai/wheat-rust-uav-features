@@ -1,0 +1,84 @@
+{
+ "gate_R_reproduction": {
+  "Full(HS+MS+RGB)": {
+   "reproduced": 0.6625459282762539,
+   "published": 0.6637330462095499,
+   "abs_diff_points": 0.11871179332959558
+  },
+  "without HS": {
+   "reproduced": 0.6677751475154666,
+   "published": 0.6623202977267586,
+   "abs_diff_points": 0.5454849788708027
+  },
+  "without MS": {
+   "reproduced": 0.527423050600013,
+   "published": 0.5314474867850507,
+   "abs_diff_points": 0.4024436185037672
+  },
+  "without RGB": {
+   "reproduced": 0.6779549029986767,
+   "published": 0.6769154927172675,
+   "abs_diff_points": 0.10394102814091921
+  },
+  "HS only": {
+   "reproduced": 0.45507440414284706,
+   "published": 0.4526356476570053,
+   "abs_diff_points": 0.2438756485841742
+  },
+  "MS only": {
+   "reproduced": 0.6688335907023018,
+   "published": 0.6695904960434355,
+   "abs_diff_points": 0.07569053411337068
+  },
+  "RGB only": {
+   "reproduced": 0.5319713485113121,
+   "published": 0.5347765778239277,
+   "abs_diff_points": 0.280522931261562
+  },
+  "groups RAW": {
+   "reproduced": 0.6491894030363644,
+   "published": 0.6455840069770249,
+   "abs_diff_points": 0.3605396059339516
+  },
+  "groups +VEG": {
+   "reproduced": 0.669246548381398,
+   "published": 0.6718309730477063,
+   "abs_diff_points": 0.25844246663083714
+  },
+  "groups +HS shape": {
+   "reproduced": 0.6668518770227324,
+   "published": 0.6637277092053414,
+   "abs_diff_points": 0.3124167817390999
+  },
+  "groups full": {
+   "reproduced": 0.6621634068279572,
+   "published": 0.664246388417928,
+   "abs_diff_points": 0.20829815899708892
+  },
+  "canopy full tile": {
+   "reproduced": 0.6684118653984585,
+   "published": 0.6681391218437588,
+   "abs_diff_points": 0.02727435546997503
+  },
+  "canopy masked": {
+   "reproduced": 0.6474224190306341,
+   "published": 0.6479221059850775,
+   "abs_diff_points": 0.04996869544433569
+  },
+  "canopy + context": {
+   "reproduced": 0.6649543075735842,
+   "published": 0.6672783644795435,
+   "abs_diff_points": 0.23240569059592708
+  }
+ },
+ "max_abs_diff_points": 0.5454849788708027,
+ "tolerance_points": 0.5,
+ "pass": false,
+ "folds_equal_folds_10x5": true,
+ "group_sizes": [
+  102,
+  116,
+  132,
+  149
+ ]
+}
