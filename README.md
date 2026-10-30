@@ -46,16 +46,16 @@ All evaluations use the same fixed protocol (defined in `r2_lib.py`):
 | Table C2 (`tab:otherprot`), single-model rows (SVM, ET, RF, LGB, XGB) | *no script, see Known gaps* | `V7_permodel.json` |
 | Table A1, fair multimodal DL as submitted (epoch chosen on the scored fold) | `B1_dl_baseline.py` (GPU) | `B1_dl_baseline.json` |
 | Table C2 (`tab:otherprot`), ResNet-18 and naive late fusion (results and class-wise values); Table C1 (`tab:naivedl`) | `legacy_dl/04_baseline_deep_learning.py` (GPU) | `outputs/results/dl_baseline_detailed.json` |
-| Table A2 (`tab:checks`), panel (a), in-sample Health-prior weight α (the submitted operating-point table); Figure 5 (`fig:reliability`); ECE/Brier | `Av_consolidated_eval.py` | `V7_consolidated_eval.json`, `V7_reliability_diagram.png` |
+| Table A2 (`tab:checks`), panel (a), in-sample Health-prior weight α (the submitted operating-point table); original calibration (ECE 0.023, Appendix A; former Figure 5) | `Av_consolidated_eval.py` | `V7_consolidated_eval.json`, `V7_reliability_diagram.png` |
 | Section 4.9 and Table 11 (`tab:fullcompact`), full-model late submission (0.790 private, 0.653 public) | `V7_honest_eval.py` | `submission_v7_repro.csv` |
-| Table 8 (`tab:ablation`), modality panel; original SHAP values (Appendix A, "Original SHAP run") | `V7_assets.py` | `V7_assets.json` |
-| Table 8 (`tab:ablation`), feature-group panel | `Av_feature_ablation_v7.py` | `V7_feature_ablation.json` |
+| Original values of the modality ablation (3×5, weights on the scored fold; Appendix A); original SHAP values (Appendix A, "Original SHAP run") | `V7_assets.py` | `V7_assets.json` |
+| Original values of the feature-group ablation (3×5, weights on the scored fold; Appendix A) | `Av_feature_ablation_v7.py` | `V7_feature_ablation.json` |
 | Original SHAP figure (not in the revised manuscript; Figure 3 now uses the October 2026 re-run, see below) | `figures_r1/fig_shap_r1.py` (reads `V7_assets.json`; the submitted figure was drawn by `Av_shap_figure_v7.py`) | `V7_shap_permodality_r1.png` |
 | Figure 4 (`fig:lime`) | `Av_lime_v7.py` | `V7_lime.json`, `V7_lime_fidelity.png` |
 | Table 10 (`tab:compact`), Table B1 (`tab:compact30`), compact-model cost in Table 16 | `R2_compact.py` | `V7_compact.json` |
 | Figure 2 (`fig:compact`) and the corrected CIs of Table 10 | `figures_r1/fig_compact_r1.py` (reads `V7_compact.json`) | `V7_compact_curve_r1.png` |
 | Table 11 (`tab:fullcompact`), compact-30 late submission | `R2_compact_submission.py` | `submission_compact30.csv`, `V7_compact_submission.json` |
-| Table 9 (`tab:canopy`) | `R2_canopy_extract.py`, then `R2_canopy_eval.py` | `features_v7_canopy*.csv`, `V7_canopy.json` |
+| Canopy-masked feature tables used by Table 9; original values of the canopy analysis (weights on the scored fold; Appendix A) | `R2_canopy_extract.py`, then `R2_canopy_eval.py` | `features_v7_canopy*.csv`, `V7_canopy.json` |
 | Table A3 (`tab:triage_insample`), panel (a), and the in-sample selective-prediction cell of Table A2 (`tab:checks`), panel (a): selective prediction of the original analysis | `R2_triage.py` | `V7_triage.json` |
 | Table A3, panel (b): confusion matrices of the original analysis | full coverage: `Av_consolidated_eval.py` (`confusion_matrix`); 80% coverage: derived from the per-class counts and metrics in `V7_triage.json`; it is the only integer matrix consistent with them and with the full-coverage matrix (no cell can exceed its full-coverage count; no separate script) | `V7_consolidated_eval.json`, `V7_triage.json` |
 | In-sample risk-coverage figure of the original analysis (not in the revised manuscript) | `figures_r1/fig_risk_coverage_r1.py` (reads `V7_triage.json`) | `V7_risk_coverage_r1.png` |
@@ -75,6 +75,9 @@ All evaluations use the same fixed protocol (defined in `r2_lib.py`):
 | Tables 6 (panels (a) and (b)), 7 and 16, fair multimodal DL, protocol B (early stopping on an inner 15% split) on all 50 folds with three seeds per fold; Appendix A (repetition-0 check) | `diagnostics_r1/exp_B_dl_protocolB_10x5.py` (GPU; pre-registered in `diagnostics_r1/PREREG_final_robustness.md`) | `diagnostics_r1/exp_B_summary.json`, `diagnostics_r1/exp_B_seedlevel.jsonl`, `diagnostics_r1/exp_B_summary_rep0_gateF2.json` (summary after repetition 0, gate F2) |
 | Table A2, panel (b), protocol B on the five folds of repetition 0 (first run; reference of gate F2); Table A1 (same rule as submitted, re-run); training time on an A100 (Table 16, note a) | `diagnostics_r1/diag_dl_earlystop.py` (GPU) | `diagnostics_r1/diag_dl_earlystop.json` |
 | Table A2, panel (b), protocol C (retrained on the full training fold; five folds of repetition 0) | `diagnostics_r1/diag_dl_protoC.py` (GPU) | `diagnostics_r1/diag_dl_protoC.json` |
+| Table 8 (`tab:ablation`, all panels), Table 9 (`tab:canopy`), Figure 5 (`fig:reliability`) and the corresponding rows of Table 17: ablations, canopy masking and calibration under the primary nested protocol, HS block as submitted and corrected | `diagnostics_r1/exp_C_auxiliary_nested.py` (pre-registered in `diagnostics_r1/PREREG_aux_hyperparam.md`; its summary step checks gates C1 and C2 against `exp_A_folds.jsonl` and `diag_nested_perfold.json`; gate R, see Known gaps) | `diagnostics_r1/exp_C_summary.json`, `diagnostics_r1/exp_C_folds.jsonl`, `diagnostics_r1/exp_C_probs.jsonl`, `diagnostics_r1/exp_C_calibration.json`, `diagnostics_r1/V7_reliability_diagram_r3.png`, `diagnostics_r1/exp_C_gate_R.json` |
+| Table A2 (`tab:checks`), panel (c): hyperparameters fixed, at library defaults, or selected by nested cross-validation (Reviewer 4, Q2.1) | `diagnostics_r1/exp_D_nested_hyperparams.py` (pre-registered in `diagnostics_r1/PREREG_aux_hyperparam.md`; gate D1 against `exp_A_folds.jsonl`) | `diagnostics_r1/exp_D_summary.json`, `diagnostics_r1/exp_D_folds.jsonl`, `diagnostics_r1/exp_D_gate.json` |
+| Section 5.1, "Sensitivity to model selection" (paired differences computed from saved outputs; no model fitted) | `diagnostics_r1/summarise_protocol_sensitivity.py` | `diagnostics_r1/protocol_sensitivity_summary.json` |
 | Tables 6, 7 and 16, MLP (256-128-3) on the 149 features | `B2_mlp_v7.py` | `outputs/reviewer_experiments/B2_mlp_v7.json` |
 | Table 16 (`tab:compute`), feature-extraction time | `timing_r1/time_feature_extraction.py` | `timing_r1/timing_feature_extraction.json` |
 
@@ -118,6 +121,13 @@ run in minutes.
     (CPU; about 100 min with 2 jobs, set `NJOBS`); on a GPU, `diagnostics_r1/exp_B_dl_protocolB_10x5.py <out_dir> run 0`
     **[raw]** and `summarise` (gate F2), then `run 1-9` and `summarise` (about 30 min on a Tesla T4). Both scripts keep
     finished folds in a checkpoint file, so an interrupted run resumes.
+12. Further checks (protocols, gates and wording fixed in advance in `diagnostics_r1/PREREG_aux_hyperparam.md`, git tag
+    `pre_aux_hyperparam`): `diagnostics_r1/exp_C_auxiliary_nested.py <out_dir> run all`, `calib` and `summarise`, and
+    `diagnostics_r1/exp_D_nested_hyperparams.py <out_dir> run all` and `summarise` (CPU only; about 12 h in total on two
+    CPU threads or about 3 h on eight; `diagnostics_r1/run_round4_chain.sh` runs them in sequence with `NJOBS` set to the
+    number of CPU threads). Both scripts keep finished folds in a checkpoint file, so an interrupted run resumes; before a
+    restart, `diagnostics_r1/check_round4_checkpoints.py` checks the checkpoint files, and on another machine
+    `diagnostics_r1/verify_one_fold.py` recomputes a stored fold and requires identical values.
 
 ## HS block: loader axis order
 
@@ -162,6 +172,20 @@ manuscript stated.
   30 MS tiles with zero-valued pixels) were computed interactively; there is no script.
 - **`V7_honest_eval.json` per-class F1** has Rust and Other swapped, because of the `LabelEncoder` ordering. Use
   `V7_consolidated_eval.json` instead.
+- **Original ablation and canopy values.** Rerun in the current environment, the original procedures of `V7_assets.py`,
+  `Av_feature_ablation_v7.py` and `R2_canopy_eval.py` reproduce the published original values within 0.55 points (gate R of
+  `PREREG_aux_hyperparam.md`, tolerance 0.5 points: not met for one configuration, "without HS", 66.78% against 66.23%).
+  The original code copied verbatim gives the same values as the new script (`exp_C_gate_R_verbatim_check.py`), so the
+  gap comes from the unrecorded June 2026 environment. The manuscript now reports these analyses under the nested
+  protocol (`exp_C_auxiliary_nested.py`), whose gates require exact equality with stored per-fold results.
+- **Change of machine during the round-4 runs.** `PREREG_aux_hyperparam.md` specifies `NJOBS=2` on the two-core Colab
+  machine. After `exp_D` with the HS block as submitted (150 folds) and the first 26 folds of `exp_C`, the run was stopped
+  and resumed on an eight-thread Colab CPU (Intel Xeon 2.20 GHz, `NJOBS=8`, Python 3.13.18; the Python patch version of
+  the first machine was not recorded, and the versions of the other packages were the same). Per-fold results do not
+  depend on `NJOBS`: each fold is computed on its own with fixed seeds and single-threaded BLAS. Before resuming,
+  `verify_one_fold.py` recomputed three stored folds on the second machine (one of `exp_C`, two tuned folds of `exp_D`)
+  with identical values in every field, and gate D1 (exact equality with `exp_A`) passed for the fixed rows computed on
+  each machine.
 - **Pre-deadline file and reproduction.** The pre-deadline prediction file `submission_v7.csv` (127 Rust) and the
   reproduced `submission_V7_repro.csv` (129 Rust) disagree on 4 of 300 tiles. The scored late submission is the
   reproduced file.
@@ -171,5 +195,7 @@ manuscript stated.
 `B2_mlp_v7.py` was run in October 2026 with the package versions pinned in `requirements.txt`. Its sanity check
 reproduced the earlier 226-feature MLP number exactly (62.89% ± 3.2). The scripts in `diagnostics_r1/` and
 `timing_r1/` and `make_folds_10x5.py` were also run in Google Colab in October 2026; `environment_postreview.txt`
-lists the package versions and hardware of the final post-review runs (`exp_A_*`, `exp_B_*`). The other scripts were run
+lists the package versions and hardware of the final post-review runs (`exp_A_*`, `exp_B_*`; `exp_C_*` and `exp_D_*` used
+the same versions of numpy, scikit-learn, SciPy, LightGBM and XGBoost on Colab CPUs, with Python 3.13.18 on the second
+machine; see Known gaps). The other scripts were run
 in Google Colab in May–June 2026. Their package versions were not recorded.

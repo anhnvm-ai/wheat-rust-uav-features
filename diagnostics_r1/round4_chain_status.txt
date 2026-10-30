@@ -1,0 +1,23 @@
+2026-10-30 04:31:27 UTC chain started; waiting until GitHub main = 5e24d99615d94d83271299e299d5cdf7d715c42f
+2026-10-30 04:33:28 UTC pushed: GitHub main = 5e24d99615d94d83271299e299d5cdf7d715c42f; tag pre_aux_hyperparam on GitHub -> 5e24d99615d94d83271299e299d5cdf7d715c42f
+2026-10-30 04:33:28 UTC D sub: start
+2026-10-30 08:27:09 UTC D sub: exit 0
+2026-10-30 08:27:10 UTC C sub: start
+2026-10-30 08:43:04 UTC stopped by hand to move to a runtime with more CPU cores; checkpoints consistent (C: 26 folds, D: 150 folds)
+2026-10-30 09:08:43 UTC chain started; waiting until the pre-registration commit 5e24d99615d94d83271299e299d5cdf7d715c42f is on GitHub (main or tag pre_aux_hyperparam)
+2026-10-30 09:08:47 UTC pushed: GitHub main = 5e24d99615d94d83271299e299d5cdf7d715c42f; tag pre_aux_hyperparam on GitHub -> 5e24d99615d94d83271299e299d5cdf7d715c42f
+2026-10-30 09:08:48 UTC checkpoints consistent; NJOBS=8 on 8 CPU threads; Intel(R) Xeon(R) CPU @ 2.20GHz
+2026-10-30 09:08:48 UTC D sub: start
+2026-10-30 09:08:52 UTC D sub: exit 0
+2026-10-30 09:08:52 UTC C sub: start
+2026-10-30 09:49:45 UTC C sub: exit 0
+2026-10-30 09:49:45 UTC C calib: start
+2026-10-30 09:49:50 UTC C calib: exit 0
+2026-10-30 09:49:50 UTC C cor: start
+2026-10-30 10:30:10 UTC C cor: exit 0
+2026-10-30 10:30:10 UTC D cor: start
+2026-10-30 11:18:40 UTC D cor: exit 0
+2026-10-30 11:18:40 UTC summarise
+2026-10-30 11:18:46 UTC C summarise: exit 0
+2026-10-30 11:18:50 UTC D summarise: exit 0
+2026-10-30 11:18:50 UTC CHAIN_DONE
