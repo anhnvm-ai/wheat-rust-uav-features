@@ -1,0 +1,10 @@
+2026-10-31 13:09:26 UTC chain started; waiting until tag pre_compact_nested -> 2e23596222ff46324fd3035869516f28beff57d8 is on GitHub
+2026-10-31 14:48:51 UTC chain stopped by hand: the tag check only read the peeled entry of an annotated tag; pre_compact_nested is a lightweight tag (on GitHub since the author's push); check fixed, chain restarted
+2026-10-31 14:48:51 UTC chain started; waiting until tag pre_compact_nested -> 2e23596222ff46324fd3035869516f28beff57d8 is on GitHub
+2026-10-31 14:48:53 UTC pushed: tag pre_compact_nested on GitHub -> 2e23596222ff46324fd3035869516f28beff57d8; GitHub main = 2e23596222ff46324fd3035869516f28beff57d8
+2026-10-31 14:48:53 UTC NJOBS=8 on 8 CPU threads; AMD EPYC 7B12
+2026-10-31 14:48:53 UTC E run: start
+2026-10-31 15:05:38 UTC E run: exit 0
+2026-10-31 15:05:39 UTC E summarise: start
+2026-10-31 15:05:43 UTC E summarise: exit 0
+2026-10-31 15:05:43 UTC CHAIN_DONE

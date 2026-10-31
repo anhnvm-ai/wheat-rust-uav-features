@@ -52,9 +52,11 @@ All evaluations use the same fixed protocol (defined in `r2_lib.py`):
 | Original values of the feature-group ablation (3×5, weights on the scored fold; Appendix A) | `Av_feature_ablation_v7.py` | `V7_feature_ablation.json` |
 | Original SHAP figure (not in the revised manuscript; Figure 3 now uses the October 2026 re-run, see below) | `figures_r1/fig_shap_r1.py` (reads `V7_assets.json`; the submitted figure was drawn by `Av_shap_figure_v7.py`) | `V7_shap_permodality_r1.png` |
 | Figure 4 (`fig:lime`) | `Av_lime_v7.py` | `V7_lime.json`, `V7_lime_fidelity.png` |
-| Table 10 (`tab:compact`), Table B1 (`tab:compact30`), compact-model cost in Table 16 | `R2_compact.py` | `V7_compact.json` |
-| Figure 2 (`fig:compact`) and the corrected CIs of Table 10 | `figures_r1/fig_compact_r1.py` (reads `V7_compact.json`) | `V7_compact_curve_r1.png` |
-| Table 11 (`tab:fullcompact`), compact-30 late submission | `R2_compact_submission.py` | `submission_compact30.csv`, `V7_compact_submission.json` |
+| Table 10 (`tab:compact`), Figure 2 (`fig:compact`) and the cross-validation column of Table 11: compact feature subsets with nested member weights (outer-fold-honest feature selection, ranking of `R2_compact.py`, selected columns in the order of the feature table; HS block as submitted) | `diagnostics_r1/exp_E_compact_nested.py` (pre-registered in `diagnostics_r1/PREREG_compact_nested.md`; hard gate E1: K = 149 must equal `exp_A_folds.jsonl` and `exp_A_probs.jsonl` fold by fold) | `diagnostics_r1/exp_E_summary.json`, `diagnostics_r1/exp_E_folds.jsonl`, `diagnostics_r1/exp_E_probs.jsonl`, `diagnostics_r1/exp_E_gate0.json`, `diagnostics_r1/V7_compact_curve_nested.png` |
+| Figure 2 (`fig:compact`) as printed (same content as `V7_compact_curve_nested.png`, label moved clear of the legend) | `figures_r1/fig_compact_nested.py` (reads `diagnostics_r1/exp_E_summary.json`) | `diagnostics_r1/V7_compact_curve_nested_fig2.png` |
+| Table B1 (`tab:compact30`; fixed 30-feature list and selection frequencies), compact-model cost in Table 16, original values of Table 10 (weights on the scored fold, columns in rank order; Appendix A) | `R2_compact.py` | `V7_compact.json` |
+| Former Figure 2 from the original values (not in the manuscript) | `figures_r1/fig_compact_r1.py` (reads `V7_compact.json`) | `V7_compact_curve_r1.png` |
+| Table 11 (`tab:fullcompact`), compact-30 late submission (test-set columns; historical, unchanged) | `R2_compact_submission.py` | `submission_compact30.csv`, `V7_compact_submission.json` |
 | Canopy-masked feature tables used by Table 9; original values of the canopy analysis (weights on the scored fold; Appendix A) | `R2_canopy_extract.py`, then `R2_canopy_eval.py` | `features_v7_canopy*.csv`, `V7_canopy.json` |
 | Table A3 (`tab:triage_insample`), panel (a), and the in-sample selective-prediction cell of Table A2 (`tab:checks`), panel (a): selective prediction of the original analysis | `R2_triage.py` | `V7_triage.json` |
 | Table A3, panel (b): confusion matrices of the original analysis | full coverage: `Av_consolidated_eval.py` (`confusion_matrix`); 80% coverage: derived from the per-class counts and metrics in `V7_triage.json`; it is the only integer matrix consistent with them and with the full-coverage matrix (no cell can exceed its full-coverage count; no separate script) | `V7_consolidated_eval.json`, `V7_triage.json` |
@@ -128,6 +130,11 @@ run in minutes.
     number of CPU threads). Both scripts keep finished folds in a checkpoint file, so an interrupted run resumes; before a
     restart, `diagnostics_r1/check_round4_checkpoints.py` checks the checkpoint files, and on another machine
     `diagnostics_r1/verify_one_fold.py` recomputes a stored fold and requires identical values.
+13. Compact feature subsets with nested member weights (protocol, gates and wording fixed in advance in
+    `diagnostics_r1/PREREG_compact_nested.md`, git tag `pre_compact_nested`): `diagnostics_r1/exp_E_compact_nested.py
+    <out_dir> gate` (gate E0, run before the lock), `run` and `summarise` (CPU only; about 25 min on eight CPU threads;
+    `diagnostics_r1/run_round5_chain.sh` runs them after checking that the script equals the tagged version). The K = 149
+    folds run first and the run stops at the first one that differs from the primary analysis.
 
 ## HS block: loader axis order
 
@@ -186,6 +193,12 @@ manuscript stated.
   `verify_one_fold.py` recomputed three stored folds on the second machine (one of `exp_C`, two tuned folds of `exp_D`)
   with identical values in every field, and gate D1 (exact equality with `exp_A`) passed for the fixed rows computed on
   each machine.
+- **Original compact-feature values.** `R2_compact.py` (June 2026) kept the selected columns in rank order, so its
+  K = 149 row (66.9%) differs from the original 10x5 evaluation of the same model (66.8%): with column subsampling in the
+  tree members, a column permutation changes the fitted models. `exp_E_compact_nested.py` restores the canonical column
+  order after selection, so its K = 149 row is the primary analysis. Rerun in the current environment (gate E0,
+  `exp_E_gate0.json`), the original procedure selects exactly the same features as in June and reproduces the published
+  Macro-F1 values within 0.17 points (June package versions not recorded).
 - **Pre-deadline file and reproduction.** The pre-deadline prediction file `submission_v7.csv` (127 Rust) and the
   reproduced `submission_V7_repro.csv` (129 Rust) disagree on 4 of 300 tiles. The scored late submission is the
   reproduced file.
@@ -197,5 +210,6 @@ reproduced the earlier 226-feature MLP number exactly (62.89% ± 3.2). The scrip
 `timing_r1/` and `make_folds_10x5.py` were also run in Google Colab in October 2026; `environment_postreview.txt`
 lists the package versions and hardware of the final post-review runs (`exp_A_*`, `exp_B_*`; `exp_C_*` and `exp_D_*` used
 the same versions of numpy, scikit-learn, SciPy, LightGBM and XGBoost on Colab CPUs, with Python 3.13.18 on the second
-machine; see Known gaps). The other scripts were run
+machine; see Known gaps; `exp_E_*` used the same versions with Python 3.13.18 on an eight-thread AMD EPYC 7B12 Colab CPU,
+and its gate E1, exact identity of every K = 149 fold with `exp_A` run on an Intel CPU, passed). The other scripts were run
 in Google Colab in May–June 2026. Their package versions were not recorded.
