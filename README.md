@@ -33,7 +33,7 @@ All evaluations use the same fixed protocol (defined in `r2_lib.py`):
 - `StandardScaler` fitted inside each fold;
 - class order fixed as Health, Other, Rust;
 - seed 42;
-- the folds of every repetition are listed in `folds_10x5.csv` (written by `make_folds_10x5.py`); the fair
+- the folds of every repetition are listed in `folds_10x5.csv` (written by `make_folds_10x5.py`); the matched
   deep baseline uses all 50 folds (its first, five-fold runs used repetition 0).
 
 ## Which script produces what
@@ -44,7 +44,7 @@ All evaluations use the same fixed protocol (defined in `r2_lib.py`):
 | Table 2 (`tab:ndvi`), tile NDVI by class | computed from the `ms_NDVI` column (no separate script) | `features_v7.csv` |
 | Table A1 (`tab:original`), weighted ensemble with validation-fold weights (as submitted) | `Av_consolidated_eval.py` | `V7_consolidated_eval.json` |
 | Table C2 (`tab:otherprot`), single-model rows (SVM, ET, RF, LGB, XGB) | *no script, see Known gaps* | `V7_permodel.json` |
-| Table A1, fair multimodal DL as submitted (epoch chosen on the scored fold) | `B1_dl_baseline.py` (GPU) | `B1_dl_baseline.json` |
+| Table A1, matched multimodal DL as submitted (epoch chosen on the scored fold) | `B1_dl_baseline.py` (GPU) | `B1_dl_baseline.json` |
 | Table C2 (`tab:otherprot`), ResNet-18 and naive late fusion (results and class-wise values); Table C1 (`tab:naivedl`) | `legacy_dl/04_baseline_deep_learning.py` (GPU) | `outputs/results/dl_baseline_detailed.json` |
 | Table A2 (`tab:checks`), panel (a), in-sample Health-prior weight α (the submitted operating-point table); original calibration (ECE 0.023, Appendix A; former Figure 5) | `Av_consolidated_eval.py` | `V7_consolidated_eval.json`, `V7_reliability_diagram.png` |
 | Section 4.9 and Table 11 (`tab:fullcompact`), full-model late submission (0.790 private, 0.653 public) | `V7_honest_eval.py` | `submission_v7_repro.csv` |
@@ -64,7 +64,7 @@ All evaluations use the same fixed protocol (defined in `r2_lib.py`):
 | Table 15 (`tab:proxyspatial`) | `R2_proxy_spatial.py` | `V7_proxy_spatial.json` |
 | `tab:srsm` (submitted version only; removed in the revision) | `R2_srsm.py` | `features_v7_srsm.csv`, `V7_srsm.json` |
 
-### Re-evaluations and post-review checks (October 2026)
+### Re-evaluations and post-review checks (October and November 2026)
 
 | Manuscript item | Script | Output |
 |---|---|---|
@@ -74,7 +74,8 @@ All evaluations use the same fixed protocol (defined in `r2_lib.py`):
 | Per-fold ensemble scores used by the paired comparisons (Table 6, panel (b); Table A2, panel (b), note); Table 7 (`tab:perclass`), ensemble row (aggregated out-of-fold probabilities with nested weights); Table 12 (`tab:operating`), Health-prior weight α with nested selection; Tables 13 (`tab:triage`) and 14 (`tab:triagecm`), selective prediction with nested cut-offs | `diagnostics_r1/diag_nested_perfold.py` (re-runs the nested part of `diag_leakage_hs.py` for the evaluated pipeline and also stores the score, probabilities and selective-prediction results of every outer fold; it stops unless its means equal those stored in `diag_leakage_hs.json`), then `diagnostics_r1/summarise_nested_rerun.py` (also reads `diag_dl_earlystop.json` and `diag_dl_protoC.json`; fits no model) | `diagnostics_r1/diag_nested_perfold.json`, `diagnostics_r1/diag_nested_perfold_probs.npz`, `diagnostics_r1/nested_rerun_summary.json` |
 | Figure 6 (`fig:triage`) | `figures_r1/fig_risk_coverage_r2.py` (reads `nested_rerun_summary.json`) | `V7_risk_coverage_r2.png` |
 | Figure 3 (`fig:shap`) and the SHAP values of Section 4.5.1 (re-run of the SHAP step of `V7_assets.py`; agreement over all and over the non-constant features; package versions stored in the output) | `diagnostics_r1/diag_shap_nonconstant.py`, then `figures_r1/fig_shap_r2.py` | `diagnostics_r1/diag_shap_nonconstant.json`, `V7_shap_permodality_r2.png` |
-| Tables 6 (panels (a) and (b)), 7 and 16, fair multimodal DL, protocol B (early stopping on an inner 15% split) on all 50 folds with three seeds per fold; Appendix A (repetition-0 check) | `diagnostics_r1/exp_B_dl_protocolB_10x5.py` (GPU; pre-registered in `diagnostics_r1/PREREG_final_robustness.md`) | `diagnostics_r1/exp_B_summary.json`, `diagnostics_r1/exp_B_seedlevel.jsonl`, `diagnostics_r1/exp_B_summary_rep0_gateF2.json` (summary after repetition 0, gate F2) |
+| Tables 6 (panels (a) and (b)), 7 and 16, matched multimodal DL, protocol B (early stopping on an inner 15% split) on all 50 folds with three seeds per fold; Appendix A (repetition-0 check) | `diagnostics_r1/exp_B_dl_protocolB_10x5.py` (GPU; pre-registered in `diagnostics_r1/PREREG_final_robustness.md`) | `diagnostics_r1/exp_B_summary.json`, `diagnostics_r1/exp_B_seedlevel.jsonl`, `diagnostics_r1/exp_B_summary_rep0_gateF2.json` (summary after repetition 0, gate F2) |
+| Table 6 (`tab:main_results`), panel (b), row with corrected HS features: deep network (protocol B, mean of the three seeds) minus the ensemble with corrected HS features (configuration S5 of `exp_A`) on the same 50 folds. Additional comparison, not part of the pre-registration (decided on 6 November 2026, after experiments A and B had been run); stored fold scores only, no model fitted; gates G1 to G4 check the inputs against `exp_A_summary.json` and `exp_B_summary.json`, and the wording for each outcome was fixed in the script before the run | `diagnostics_r1/diag_corrected_hs_vs_dl.py` | `diagnostics_r1/diag_corrected_hs_vs_dl.json` |
 | Table A2, panel (b), protocol B on the five folds of repetition 0 (first run; reference of gate F2); Table A1 (same rule as submitted, re-run); training time on an A100 (Table 16, note a) | `diagnostics_r1/diag_dl_earlystop.py` (GPU) | `diagnostics_r1/diag_dl_earlystop.json` |
 | Table A2, panel (b), protocol C (retrained on the full training fold; five folds of repetition 0) | `diagnostics_r1/diag_dl_protoC.py` (GPU) | `diagnostics_r1/diag_dl_protoC.json` |
 | Table 8 (`tab:ablation`, all panels), Table 9 (`tab:canopy`), Figure 5 (`fig:reliability`) and the corresponding rows of Table 17: ablations, canopy masking and calibration under the primary nested protocol, HS block as submitted and corrected | `diagnostics_r1/exp_C_auxiliary_nested.py` (pre-registered in `diagnostics_r1/PREREG_aux_hyperparam.md`; its summary step checks gates C1 and C2 against `exp_A_folds.jsonl` and `diag_nested_perfold.json`; gate R, see Known gaps) | `diagnostics_r1/exp_C_summary.json`, `diagnostics_r1/exp_C_folds.jsonl`, `diagnostics_r1/exp_C_probs.jsonl`, `diagnostics_r1/exp_C_calibration.json`, `diagnostics_r1/V7_reliability_diagram_r3.png`, `diagnostics_r1/exp_C_gate_R.json` |
@@ -84,7 +85,7 @@ All evaluations use the same fixed protocol (defined in `r2_lib.py`):
 | Table 16 (`tab:compute`), feature-extraction time | `timing_r1/time_feature_extraction.py` | `timing_r1/timing_feature_extraction.json` |
 
 Not produced by code:
-- Table 17 (`tab:stages`) compiles values from Tables 6, 8, 9, 10, 12, 13 and C2; no model was fitted for it.
+- Table 17 (`tab:stages`) summarises the main findings of Tables 6, 8, 9, 10, 12, 13 and 15; no model was fitted for it.
 - Figure 1 (`fig:block_diagram`) is drawn with TikZ in the manuscript source (`fig_pipeline.tex`). In the submitted version,
   it and `fig:flowchart` (now removed) were drawn by hand in draw.io and showed an earlier 226-feature version
   of the pipeline.
@@ -135,6 +136,9 @@ run in minutes.
     <out_dir> gate` (gate E0, run before the lock), `run` and `summarise` (CPU only; about 25 min on eight CPU threads;
     `diagnostics_r1/run_round5_chain.sh` runs them after checking that the script equals the tagged version). The K = 149
     folds run first and the run stops at the first one that differs from the primary analysis.
+14. Additional comparison, not part of the pre-registration (decided on 6 November 2026, after steps 11 and 13):
+    `diagnostics_r1/diag_corrected_hs_vs_dl.py` (reads the stored fold scores of step 11; a few seconds on a CPU; its
+    gates G1 to G4 and the wording for each outcome are given in the script).
 
 ## HS block: loader axis order
 
@@ -211,5 +215,7 @@ reproduced the earlier 226-feature MLP number exactly (62.89% ± 3.2). The scrip
 lists the package versions and hardware of the final post-review runs (`exp_A_*`, `exp_B_*`; `exp_C_*` and `exp_D_*` used
 the same versions of numpy, scikit-learn, SciPy, LightGBM and XGBoost on Colab CPUs, with Python 3.13.18 on the second
 machine; see Known gaps; `exp_E_*` used the same versions with Python 3.13.18 on an eight-thread AMD EPYC 7B12 Colab CPU,
-and its gate E1, exact identity of every K = 149 fold with `exp_A` run on an Intel CPU, passed). The other scripts were run
+and its gate E1, exact identity of every K = 149 fold with `exp_A` run on an Intel CPU, passed).
+`diagnostics_r1/diag_corrected_hs_vs_dl.py` was run in November 2026; its output stores the Python, numpy and SciPy
+versions. The other scripts were run
 in Google Colab in May–June 2026. Their package versions were not recorded.
